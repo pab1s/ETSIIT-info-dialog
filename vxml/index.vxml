@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+  <form id="mainForm">
+    <block>
+      <prompt>
+      Bienvenido a la Escuela Técnica y Superior de Ingeniería Informática y 
+      Telecomunicaciones de la Universidad de Granada. Por favor, elija su idioma:
+        <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
+        Pulse 1 para español,
+        <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
+        2 para catalán, o
+        <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
+        3 para inglés.
+      </prompt>
+      <field name="selectedLanguage" type="digits?">
+        <!-- Definir un máximo de tres intentos para el reconocimiento -->
+        <filled>
+          <if cond="selectedLanguage == '1'">
+            <!-- Redirigir al menú en español -->
+            <submit next="info_es.vxml" method="post" namelist="selectedLanguage"/>
+          </if>
+          <elseif cond="selectedLanguage == '2'">
+            <!-- Redirigir al menú en catalán -->
+            <submit next="info_ca.vxml" method="post" namelist="selectedLanguage"/>
+          </elseif>
+          <elseif cond="selectedLanguage == '3'">
+            <!-- Redirigir al menú en inglés -->
+            <submit next="info_en.vxml" method="post" namelist="selectedLanguage"/>
+          </elseif>
+          <else>
+            <!-- Después de tres intentos fallidos, redirigir al menú en español -->
+            <goto next="info_es.vxml"/>
+          </else>
+        </filled>
+        <noinput count="3">
+          <!-- Si no hay entrada de voz después de tres intentos, redirigir al menú en español -->
+          <goto next="info_es.vxml"/>
+        </noinput>
+        <nomatch>
+          <!-- Si no se reconoce una respuesta válida, solicitar nuevamente la selección de idioma -->
+          <reprompt/>
+        </nomatch>
+      </field>
+    </block>
+  </form>
+</vxml>
