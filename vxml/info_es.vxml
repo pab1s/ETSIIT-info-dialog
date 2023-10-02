@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+    <form id="seleccionar_opcion">
+    <grammar src="../grammars/info_es.jsgf" />
+    <block>
+        <prompt> Por favor, dígame la titulación de la que desea obtener información. En nuestra
+            facultad disponemos de las siguientes titulaciones:
+            <break time="500ms" />
+            Ingeniería Informática, Ingeniería de Tecnologías de Telecomunicación, Doble Grado en Ingeniería
+            Informática y Matemáticas y Doble Grado en Ingeniería Informática y Administración y
+            Dirección de Empresas. </prompt>
+    </block>
+</vxml>
