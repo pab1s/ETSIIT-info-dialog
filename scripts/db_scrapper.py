@@ -51,7 +51,7 @@ for seccion_curso in secciones_cursos:
     for tabla in tabla_semestres:
         semestre = tabla.find('caption').text.strip()
         semester_data = {
-            "semester_name": semestre,
+            "semester_name": 1 if semestre == "Primer semestre" else 2,
             "subjects": []
         }
 
@@ -90,7 +90,8 @@ for seccion_curso in secciones_cursos:
                 for profesor in profesores:
                     nombre_profesor = profesor.a.text.strip()
                     grupos = profesor.find('span', class_='grupos').text.strip()
-                    grupos = ' '.join(grupos.split())
+                    # grupos = ' '.join(grupos.split())
+                    grupos = grupos.split()[-1] # Coge solo uno de los grupos, ver como arreglar 
                     professor_data = {
                         "professor_name": nombre_profesor,
                         "groups": grupos
@@ -133,12 +134,14 @@ for seccion_curso in secciones_cursos:
                             aula = info_horario[0].split(': ')[1]
                             fechas_horario = info_horario[2].split(': ')[1]
                             horario = info_horario[3].split(': ')[1]
+                            horario = horario.split(' ')[1::2]
                             schedule_data = {
                                 "group": grupo,
                                 "day": dias_semana[i],
                                 "classroom": aula,
                                 "dates": fechas_horario,
-                                "time": horario
+                                "start_time": horario[0],
+                                "end_time": horario[1]
                             }
                             schedules_data["schedules_list"].append(schedule_data)
 
@@ -150,7 +153,7 @@ for seccion_curso in secciones_cursos:
 
     data["courses"].append(course)
 
-# Serialize the data structure to JSON and save it to a file
+# Guardar archivo a formato JSON
 with open('ugr_data.json', 'w', encoding='utf-8') as json_file:
     json.dump(data, json_file, ensure_ascii=False, indent=4)
 
