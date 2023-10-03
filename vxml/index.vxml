@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+  <script src="scripts/saludos.js"/>
 
   <catch event="nomatch noinput" count ="3">
     <exit/>
   </catch>
 
   <menu>
-    <prompt count="1" bargein="false">
+    <prompt count="1" bargein="false"> <value expr="saludo()"/>
       Bienvenido a la Escuela Tecnica y Superior de Ingenieria Informatica y 
       Telecomunicaciones de la Universidad de Granada. Por favor, elija su idioma:
       <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
@@ -23,6 +24,7 @@
       CASTELLANO
     </choice>
     <choice dtmf="2" next="info_ca.vxml">
+      <grammar src="grammars/triaIdioma.jsgf" />
       CATALAN
     </choice>
     <choice dtmf="3" next="info_en.vxml">
