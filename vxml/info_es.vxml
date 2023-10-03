@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+
+    <script src="scripts/comprobar_titulacion.js"/>
+
     <form id="seleccionar_opcion">
     <grammar src="../grammars/info_es.jsgf" />
     <block>
-        <prompt> Por favor, dígame la titulación de la que desea obtener información. En nuestra
+        <prompt> Por favor, digame la titulacion de la que desea obtener informacion. En nuestra
             facultad disponemos de las siguientes titulaciones:
             <break time="500ms" />
-            Ingeniería Informática, Ingeniería de Tecnologías de Telecomunicación, Doble Grado en Ingeniería
-            Informática y Matemáticas y Doble Grado en Ingeniería Informática y Administración y
-            Dirección de Empresas. </prompt>
+            Ingenieria Informatica, Ingeniería de Tecnologias de Telecomunicacion, Doble Grado en Ingenieria
+            Informatica y Matematicas y Doble Grado en Ingenieria Informatica y Administracion y
+            Direccion de Empresas.
+        </prompt>
+
+        <field name="titulacion">
+            <grammar src="grammars/titulacion_es.jsgf"/>
+            <prompt>
+                <!--audio src="audios/background.wav" /-->
+            </prompt>
+            <filled>
+                <assign name="grado" expr="comprobarTitulacion(titulacion)"/>
+            </filled>
+        </field>
+        <field name="opcion">
+            <grammar src="grammars/opcion_es.jsgf"/>
+            De acuerdo, ¿que informacion desea obtener de <value expr="titulacion"/>?
+            Le podemos ofrecer informacion acerca de algun CURSO, PROFESOR o ASIGNATURA.
+            
+            <filled>
+                <if cond="opcion=='profesor'">
+                    <goto next="profesor_es.vxml"/>
+                </if>
+                <elseif cond="opcion=='curso'">
+                    <goto next="curso_es.vxml"/>
+                </elseif>
+                <elseif cond="opcion=='asignatura'">
+                    <goto next="asignatura_es.vxml"/>
+                </elseif>
+            </filled>
+
+        </field>
     </block>
     </form>
 </vxml>
