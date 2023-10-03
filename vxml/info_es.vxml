@@ -3,44 +3,82 @@
 
     <script src="scripts/comprobar_titulacion.js"/>
 
+    <link event="help">
+        <grammar src="grammars/ayuda.jsgf"/>
+    </link>
+
     <form id="seleccionar_opcion">
-    <grammar src="../grammars/info_es.jsgf" />
-    <block>
-        <prompt> Por favor, digame la titulacion de la que desea obtener informacion. En nuestra
-            facultad disponemos de las siguientes titulaciones:
-            <break time="500ms" />
-            Ingenieria Informatica, Ingeniería de Tecnologias de Telecomunicacion, Doble Grado en Ingenieria
-            Informatica y Matematicas y Doble Grado en Ingenieria Informatica y Administracion y
-            Direccion de Empresas.
-        </prompt>
-
-        <field name="titulacion">
-            <grammar src="grammars/titulacion_es.jsgf"/>
-            <prompt>
-                <!--audio src="audios/background.wav" /-->
+        <grammar src="../grammars/info_es.jsgf" />
+        <block>
+            <prompt> Por favor, digame la titulacion de la que desea obtener informacion. En nuestra
+                facultad disponemos de las siguientes titulaciones:
+                <break time="500ms" />
+                Ingenieria Informatica, Ingeniería de Tecnologias de Telecomunicacion, Doble Grado en Ingenieria
+                Informatica y Matematicas y Doble Grado en Ingenieria Informatica y Administracion y
+                Direccion de Empresas.
             </prompt>
+
+            <field name="titulacion">
+                <grammar src="grammars/titulacion_es.jsgf"/>
+                <prompt>
+                    <!--audio src="audios/background.wav" /-->
+                </prompt>
+
+                <filled>
+                    <assign name="grado" expr="comprobarTitulacion(titulacion)"/>
+                </filled>
+
+            </field>
+
+            <field name="opcion">
+                <grammar src="grammars/opcion_es.jsgf"/>
+                De acuerdo, ¿que informacion desea obtener de <value expr="titulacion"/>?
+                Le podemos ofrecer informacion acerca de algun CURSO, PROFESOR o ASIGNATURA.
+                
+                <filled>
+                    <if cond="opcion=='profesor'">
+                        <goto next="profesor_es.vxml"/>
+                    </if>
+                    <elseif cond="opcion=='curso'">
+                        <goto next="#es_curso"/>
+                    </elseif>
+                    <elseif cond="opcion=='asignatura'">
+                        <goto next="asignatura_es.vxml"/>
+                    </elseif>
+                </filled>
+
+            </field>
+        </block>
+    </form>
+
+    <form id="es_curso">
+        <block>
+            <prompt> Ha elegido la opcion de consultar acerca de los cursos. </prompt>
+            <break time="500ms"/>
+        </block>
+
+        <!-- EN ESTE ALMACENAMOS EL CURSO DEL QUE VA A PEDIR LA INFORMACION    -->
+        <field name="curso">
+            <grammar src="grammars/HAYQCREAR" />
+
+            <prompt> Indique el curso sobre el que desea obtener informacion </prompt>
+
+            <!-- HAY Q HACER EL CODIGO DE GESTION DE ERRORES -->
+            <help>
+                <throw event="info_cursos_es"/>
+            </help>
+
+             <noinput>
+                <throw event="info_cursos_es"/>
+            </noinput>
+
             <filled>
-                <assign name="grado" expr="comprobarTitulacion(titulacion)"/>
-            </filled>
-        </field>
-        <field name="opcion">
-            <grammar src="grammars/opcion_es.jsgf"/>
-            De acuerdo, ¿que informacion desea obtener de <value expr="titulacion"/>?
-            Le podemos ofrecer informacion acerca de algun CURSO, PROFESOR o ASIGNATURA.
-            
-            <filled>
-                <if cond="opcion=='profesor'">
-                    <goto next="profesor_es.vxml"/>
-                </if>
-                <elseif cond="opcion=='curso'">
-                    <goto next="curso_es.vxml"/>
-                </elseif>
-                <elseif cond="opcion=='asignatura'">
-                    <goto next="asignatura_es.vxml"/>
-                </elseif>
+                <!-- HAY Q HACER EL CODIGO DE CD LO TENGAMOS -->
             </filled>
 
         </field>
-    </block>
+
     </form>
+
+    
 </vxml>
