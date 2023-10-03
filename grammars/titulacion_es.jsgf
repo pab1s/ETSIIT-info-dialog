@@ -1,0 +1,11 @@
+#JSGF V1.0;
+
+grammar titulaciones;
+
+public <titulaciones> = <informatica> | <telecomunicaciones> | <dgiim> | <dgiiade>;
+
+<informatica> = [ingenieria] informatica;
+<telecomunicaciones> = [ingenieria de tecnologia[s] de] teleco[municacion[es]];
+<ade> = administracion y direccion de empresas | ade;
+<dgiim> = [[doble] (grado | titulacion) [en]] (<informatica> [y] matematicas) | (matematicas [e|y] <informatica>);
+<dgiiade> = [[doble] (grado | titulacion) [en]] (<informatica> [y] <ade>) | (<ade> [y] <informatica>);
