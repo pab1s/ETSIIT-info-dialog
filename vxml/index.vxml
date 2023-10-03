@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+
+  <catch event="nomatch noinput" count ="3">
+    <exit/>
+  </catch>
+
   <menu>
-    <property name="inputmodes" value="voice dtmf" />
     <prompt count="1" bargein="false">
-      Bienvenido a la Escuela Técnica y Superior de Ingeniería Informática y 
+      Bienvenido a la Escuela Tecnica y Superior de Ingenieria Informatica y 
       Telecomunicaciones de la Universidad de Granada. Por favor, elija su idioma:
       <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
     </prompt>
     <prompt>
-      Pulse 1 para español,
+      Para CASTELLANO, pulse 1 o diga CASTELLANO,
       <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
-      2 para catalán, o
+      Para CATALAN, diga CATALAN o pulse 2
       <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
-      3 para inglés.
+      Para INGLES, diga INGLES o pulse 3
     </prompt>
 
-    <choice dtmf="1" next="info_es.vxml"> </choice>
-    <choice dtmf="2" next="info_ca.vxml"> </choice>
-    <choice dtmf="3" next="info_en.vxml"> </choice>
+    <choice dtmf="1" next="info_es.vxml">
+      CASTELLANO
+    </choice>
+    <choice dtmf="2" next="info_ca.vxml">
+      CATALAN
+    </choice>
+    <choice dtmf="3" next="info_en.vxml">
+      <grammar src="grammars/selectLanguage.jsgf" />
+      INGLES
+    </choice>
 
     <noinput>
-      No he entendido cual es la opción deseada. Por favor, repita.
+      No he entendido cual es la opcion deseada. Por favor, repita.
       <reprompt />
     </noinput>
-
-    <!-- VER SI FUNCIONA (CREO QUE NO DEBERIA) -->
-    <noinput count="5">
-      <!-- Después de 5 intentos de no entrada de voz, terminar -->
-      <disconnect />
-    </noinput>
-    <nomatch count="3">
-      <!-- Después de 3 intentos de no coincidencia, terminar -->
-      <disconnect />
-    </nomatch>
-
   </menu>
 </vxml>
