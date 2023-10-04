@@ -10,30 +10,13 @@
     <form id="seleccionar_opcion">
         <grammar src="../grammars/info_es.jsgf" />
         <block>
-            <prompt> Por favor, digame la titulacion de la que desea obtener informacion. En nuestra
-                facultad disponemos de las siguientes titulaciones:
+            <prompt> Por favor, digame de que desea obtener informacion.
                 <break time="500ms" />
-                Ingenieria Informatica, Ingenieria de Tecnologias de Telecomunicacion, Doble Grado en Ingenieria
-                Informatica y Matematicas y Doble Grado en Ingenieria Informatica y Administracion y
-                Direccion de Empresas.
             </prompt>
-
-            <field name="titulacion">
-                <grammar src="grammars/titulacion_es.jsgf"/>
-                <prompt>
-                    <!--audio src="audios/background.wav" /-->
-                </prompt>
-
-                <filled>
-                    <assign name="grado" expr="comprobarTitulacion(titulacion)"/>
-                </filled>
-
-            </field>
 
             <field name="opcion">
                 <grammar src="grammars/opcion_es.jsgf"/>
-                De acuerdo, ¿que informacion desea obtener de <value expr="titulacion"/>?
-                Le podemos ofrecer informacion acerca de algun CURSO, PROFESOR o ASIGNATURA.
+                Le podemos ofrecer informacion acerca de algun CURSO o ASIGNATURA.
                 
                 <filled>
                     <if cond="opcion=='profesor'">
@@ -48,6 +31,21 @@
                 </filled>
 
             </field>
+
+            <field name="titulacion">
+                <grammar src="grammars/titulacion_es.jsgf"/>
+                <prompt>
+                    <!--audio src="audios/background.wav" /-->
+                </prompt>
+
+                <filled>
+                    <assign name="grado" expr="comprobarTitulacion(titulacion)"/>
+                </filled>
+
+            </field>
+
+            
+
         </block>
     </form>    
 </vxml>
