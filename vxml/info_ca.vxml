@@ -9,18 +9,16 @@
 
             <field name="opcion">
                 <grammar src="grammars/opcion_es.jsgf"/>
-                Le podemos ofrecer informacion acerca de algun CURSO o ASIGNATURA.
-                
-                <filled>
-                    <if cond="opcion=='curso'">
-                        <submit next="http://www.http://etsiit-info.42web.io/server_template.php" method="post" namelist="David Cabezas Berrido" fetchtimeout="100s"/>
-                    <else />
-                        <prompt> La otra </prompt>
-                    </if>
-                </filled>
+                <prompt> Le podemos ofrecer informacion acerca de algun CURSO o ASIGNATURA. </prompt>
+            </field> 
 
-            </field>          
-
+            <filled>
+                <if cond="opcion=='curso'">
+                    <submit next="http://www.http://etsiit-info.42web.io/server_template.php" method="post" namelist="David Cabezas Berrido" fetchtimeout="100s"/>
+                <else/>
+                    <prompt> La otra </prompt>
+                </if>
+            </filled>
         </block>
     </form>    
 </vxml>

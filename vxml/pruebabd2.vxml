@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="es-ES" application="information.xml">
+
+    <form id="inicio">
+        <!-- A modo de saludo, y para indicar qué hará el usuario, se presenta la accion -->
+        <block>
+            <prompt><prosody rate="medium">Para RESERVAR una cita diga RESERVAR</prosody></prompt>
+            <break time="150ms"/>
+            <prompt><prosody rate="medium">Para CANCELAR una cita diga CANCELAR</prosody></prompt>
+            <break time="150ms"/>
+            <prompt><prosody rate="medium">Para CONSULTAR su cita diga CONSULTAR</prosody></prompt>
+            <break time="150ms"/>
+            <prompt><prosody rate="medium">Si no quiere realizar ninguna opcion, por favor diga FIN</prosody></prompt>
+		<break time="500ms"/>
+        </block>
+        
+        <field name="elegir">
+            <grammar src="eleccion.jsgf"/>
+            <prompt>Que va a hacer?</prompt>
+        
+            <filled>
+                <assign name="eleccion" expr="elegir"/>
+                
+                <if cond="eleccion=='reservar'">
+                    <prompt> OK.</prompt>
+                <elseif cond="eleccion=='consultar'"/>
+                    
+                <elseif cond="eleccion=='cancelar'"/>
+                   <prompt>  Adios.</prompt>
+
+                <elseif cond="eleccion=='fin'"/>
+                    <prompt> Hasta mañana.</prompt>
+					          <exit/>
+                <else/>
+                  <prompt> La opcion dicha no esta disponible </prompt>
+                  <clear namelist="inicio"/>
+				      </if>
+            </filled>
+        
+        </field>
+        
+    </form> 
