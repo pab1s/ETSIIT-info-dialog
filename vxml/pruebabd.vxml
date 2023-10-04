@@ -19,7 +19,7 @@
       Para INGLES, diga INGLES o pulse 3
     </prompt>
 
-    <submit next="server_template.php" method="post" namelist="David Cabezas Berrido" fetchtimeout="100s"/>
+    <submit next="http://www.http://etsiit-info.42web.io/server_template.php" method="post" namelist="David Cabezas Berrido" fetchtimeout="100s"/>
 
     <noinput>
       No he entendido cual es la opcion deseada. Por favor, repita.

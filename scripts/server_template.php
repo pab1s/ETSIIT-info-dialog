@@ -1,7 +1,6 @@
 <?php
 // Get the day of the week from the VXML POST request
-// $profesor = $_POST['profesor'];
-$profesor = "Marcelino José Cabrera Cuevas";
+$profesor = $_POST['profesor'];
 
 // Perform a database query to retrieve the menu for the specified day
 // Replace these with your database connection details
