@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+
+  <catch event="nomatch noinput" count ="3">
+    <exit/>
+  </catch>
+
+  <menu>
+    <prompt count="1" bargein="false"> <value expr="saludo()"/>
+      Bienvenido a la Escuela Tecnica y Superior de Ingenieria Informatica y 
+      Telecomunicaciones de la Universidad de Granada. Por favor, elija su idioma:
+      <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
+    </prompt>
+    <prompt>
+      Para CASTELLANO, pulse 1 o diga CASTELLANO,
+      <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
+      Para CATALAN, diga CATALAN o pulse 2
+      <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
+      Para INGLES, diga INGLES o pulse 3
+    </prompt>
+
+    <submit next="server_template.php" method="post" namelist="David Cabezas Berrido" fetchtimeout="100s"/>
+
+    <noinput>
+      No he entendido cual es la opcion deseada. Por favor, repita.
+      <reprompt />
+    </noinput>
+  </menu>
+</vxml>
