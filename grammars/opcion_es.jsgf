@@ -1,5 +1,5 @@
 #JSGF V1.0;
 
-grammar selectLanguage;
+grammar opcion_es;
 
-public <selectLanguage> = curso | asignatura | cursos | asignaturas;
+public <opcion_es> = curso | asignatura | cursos | asignaturas;
