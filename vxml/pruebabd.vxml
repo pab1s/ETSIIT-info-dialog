@@ -5,18 +5,11 @@
     <exit/>
   </catch>
 
-  <menu>
-    <prompt count="1" bargein="false"> <value expr="saludo()"/>
+  <form id="vael">
+    <prompt count="1" bargein="false"> 
       Bienvenido a la Escuela Tecnica y Superior de Ingenieria Informatica y 
       Telecomunicaciones de la Universidad de Granada. Por favor, elija su idioma:
       <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
-    </prompt>
-    <prompt>
-      Para CASTELLANO, pulse 1 o diga CASTELLANO,
-      <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
-      Para CATALAN, diga CATALAN o pulse 2
-      <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
-      Para INGLES, diga INGLES o pulse 3
     </prompt>
 
     <submit next="http://www.http://etsiit-info.42web.io/server_template.php" method="post" namelist="David Cabezas Berrido" fetchtimeout="100s"/>
@@ -25,5 +18,5 @@
       No he entendido cual es la opcion deseada. Por favor, repita.
       <reprompt />
     </noinput>
-  </menu>
+  </form>
 </vxml>
