@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+from unidecode import unidecode  # Importa unidecode
 
 # URL of the webpage
 grados_es = ['grado-ingenieria-informatica', 'grado-ingenieria-tecnologias-telecomunicacion',
@@ -11,7 +12,7 @@ url = 'https://www.ugr.es/estudiantes/grados/'
 dias_abreviaturas = {
     'L': 'Lunes',
     'M': 'Martes',
-    'X': 'Miércoles',
+    'X': 'Miercoles',
     'J': 'Jueves',
     'V': 'Viernes'
 }
@@ -137,8 +138,17 @@ for grado in grados_es:
                                             horario[1]+":00"
                                         ]
 
+                                         # Aplica unidecode a cada cadena en los datos, excepto index y horas
+                                        for j in range(len(course_data)):
+                                            if j not in [0, 8, 9]:  # Evita aplicar unidecode a index, hora de inicio y hora de fin
+                                                if isinstance(course_data[j], str):
+                                                    course_data[j] = unidecode(course_data[j])
+
+
                                         data.append(course_data)
                                         index += 1
+
+                                        
 
 # Save data to a CSV file
 with open('data/ugr_data.csv', 'w', newline='', encoding='utf-8') as csv_file:
