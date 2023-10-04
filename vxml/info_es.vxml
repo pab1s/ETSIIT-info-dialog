@@ -40,7 +40,7 @@
                         <goto next="profesor_es.vxml"/>
                     </if>
                     <elseif cond="opcion=='curso'">
-                        <goto next="#es_curso"/>
+                        <goto next="curso_es.vxml"/>
                     </elseif>
                     <elseif cond="opcion=='asignatura'">
                         <goto next="asignatura_es.vxml"/>
@@ -49,36 +49,5 @@
 
             </field>
         </block>
-    </form>
-
-    <form id="es_curso">
-        <block>
-            <prompt> Ha elegido la opcion de consultar acerca de los cursos. </prompt>
-            <break time="500ms"/>
-        </block>
-
-        <!-- EN ESTE ALMACENAMOS EL CURSO DEL QUE VA A PEDIR LA INFORMACION    -->
-        <field name="curso">
-            <grammar src="grammars/HAYQCREAR" />
-
-            <prompt> Indique el curso sobre el que desea obtener informacion </prompt>
-
-            <!-- HAY Q HACER EL CODIGO DE GESTION DE ERRORES -->
-            <help>
-                <throw event="info_cursos_es"/>
-            </help>
-
-             <noinput>
-                <throw event="info_cursos_es"/>
-            </noinput>
-
-            <filled>
-                <!-- HAY Q HACER EL CODIGO DE CD LO TENGAMOS -->
-            </filled>
-
-        </field>
-
-    </form>
-
-    
+    </form>    
 </vxml>

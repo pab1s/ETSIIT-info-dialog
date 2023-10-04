@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml" application="info_es.vxml">
+
+<form id="es_curso">
+    <block>
+        <prompt> Ha elegido la opcion de consultar acerca de los cursos. </prompt>
+        <break time="500ms"/>
+    </block>
+
+    <!-- EN ESTE ALMACENAMOS EL CURSO DEL QUE VA A PEDIR LA INFORMACION    -->
+    <field name="curso">
+        <grammar src="grammars/HAYQCREAR" />
+
+        <prompt> Indique el curso sobre el que desea obtener informacion </prompt>
+
+        <!-- HAY Q HACER EL CODIGO DE GESTION DE ERRORES -->
+        <help>
+            <throw event="info_cursos_es"/>
+        </help>
+
+            <noinput>
+            <throw event="info_cursos_es"/>
+        </noinput>
+
+        <filled>
+            <!-- HAY Q HACER EL CODIGO DE CD LO TENGAMOS -->
+        </filled>
+
+    </field>
+
+</form>
