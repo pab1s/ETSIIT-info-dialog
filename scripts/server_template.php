@@ -17,7 +17,7 @@ if (!$conn) {
     die("Connection failed: " . sqlsrv_errors());
 }
 
-$sql = "SELECT asignatura FROM ugr_courses WHERE profesor = ?";
+$sql = "SELECT asignatura FROM etsiit_courses WHERE profesor = ?";
 $params = array($profesor);
 $query = sqlsrv_query($conn, $sql, $params);
 
@@ -32,13 +32,14 @@ if (!$row) {
     $response = "Disculpa, no hemos encontrado ninguna asignatura impartida por $profesor.";
 } else {
     // Get the menu from the database
-    $response = $row['asignatura'];
+    // $response = $row['asignatura'];
+    $response = "Hemos encontrado su respuesta"
 }
 
 // Output the menu as VoiceXML
 header('Content-Type: application/xml; charset=utf-8');
 echo '<?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">
   <form>
     <block>
       <prompt>' . $response . '</prompt>
