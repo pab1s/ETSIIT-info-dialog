@@ -5,16 +5,34 @@
         <grammar src="grammars/ayuda.jsgf"/>
     </link>
 
+    <var name="grado"/>
+    <var name="numeroTitulo" expr="'0'" />
     <var name="profesor" expr="'David Cabezas Berrido'" />
 
     <form id="seleccionar_opcion">
         <block>
             <prompt>
-                Por favor, digame de que desea obtener informacion. El profesor <value expr="profesor" />.
+                Por favor, digame de que desea obtener informacion.
                 <!--break time="2000ms" /-->
             </prompt>
         </block>
 
+        <field name="titulacion">
+            <grammar src="grammars/titulacion_es.jsgf"/>
+            <prompt>
+            Empiece con decirnos el nombre de la titulacion de la que desea obtener informacion.
+            </prompt>
+
+            <filled>
+                <assign name="numeroTitulo" expr="comprobarGrado(titulacion)"/>
+
+                <if cond="numeroTitulo=='1'">
+                    <assign name="grado" expr="'mates"/>
+                
+                </if>
+            </filled>
+        </field>
+        
         <field name="opcion">
             <grammar src="grammars/option_es.jsgf"/>
             <prompt>
