@@ -9,11 +9,11 @@
 
     <form id="seleccionar_opcion">
         <block>
-        <prompt>
-            Por favor, digame de que desea obtener informacion. El profesor <value expr="profesor" />.
-            <!--break time="2000ms" /-->
-        </prompt>
-    </block>
+            <prompt>
+                Por favor, digame de que desea obtener informacion. El profesor <value expr="profesor" />.
+                <!--break time="2000ms" /-->
+            </prompt>
+        </block>
 
         <field name="opcion">
             <grammar src="grammars/option_es.jsgf"/>
@@ -27,7 +27,7 @@
                         De acuerdo, veamos esto.
                         <!--break time="2000ms" /-->
                     </prompt>
-                    <submit next="http://www.http://etsiit-info.42web.io/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
+                    <submit next="http://www.etsiit-info.42web.io/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
                     <!--goto next="profesores.vxml"/-->
                 <elseif cond="opcion=='curso'" />
                     <goto next="cursos.vxml"/>
