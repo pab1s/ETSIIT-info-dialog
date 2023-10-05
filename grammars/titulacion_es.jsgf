@@ -8,4 +8,4 @@ public <titulaciones> = <informatica> | <telecomunicaciones> | <dgiim> | <dgiiad
 <telecomunicaciones> = [ingenieria de tecnologia[s] de] teleco[municacion[es]];
 <ade> = administracion y direccion de empresas | ade;
 <dgiim> = [[doble] (grado | titulacion) [en]] (<informatica> [y] matematicas) | (matematicas [e|y] <informatica>);
-<dgiiade> = [[doble] (grado | titulacion) [en]] (<informatica> [y] <ade>) | (<ade> [y] <informatica>);
+<dgiiade> = [[doble] (grado | titulacion) [en]] (<informatica> [y] <ade>) | (<ade> [e|y] <informatica>);
