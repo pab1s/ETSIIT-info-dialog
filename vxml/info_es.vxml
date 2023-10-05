@@ -1,51 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
-
-    <script src="scripts/comprobar_titulacion.js"/>
+<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">
 
     <link event="help">
         <grammar src="grammars/ayuda.jsgf"/>
     </link>
 
+    <var name="profesor" expr="'David Cabezas Berrido'" />
+
     <form id="seleccionar_opcion">
-        <grammar src="../grammars/info_es.jsgf" />
         <block>
-            <prompt> Por favor, digame de que desea obtener informacion.
-                <break time="500ms" />
+        <prompt>
+            Por favor, digame de que desea obtener informacion. El profesor <value expr="profesor" />.
+            <!--break time="2000ms" /-->
+        </prompt>
+    </block>
+
+        <field name="opcion">
+            <grammar src="grammars/option_es.jsgf"/>
+            <prompt>
+            Le podemos ofrecer informacion acerca de algun CURSO o ASIGNATURA.
             </prompt>
 
-            <field name="opcion">
-                <grammar src="grammars/opcion_es.jsgf"/>
-                Le podemos ofrecer informacion acerca de algun CURSO o ASIGNATURA.
-                
-                <filled>
-                    <if cond="opcion=='profesor'">
-                        <goto next="profesores.vxml"/>
-                    </if>
-                    <elseif cond="opcion=='curso'">
-                        <goto next="cursos.vxml"/>
-                    </elseif>
-                    <elseif cond="opcion=='asignatura'">
-                        <goto next="asignatura.vxml"/>
-                    </elseif>
-                </filled>
-
-            </field>
-
-            <field name="titulacion">
-                <grammar src="grammars/titulacion_es.jsgf"/>
-                <prompt>
-                    <!--audio src="audios/background.wav" /-->
-                </prompt>
-
-                <filled>
-                    <assign name="grado" expr="comprobarTitulacion(titulacion)"/>
-                </filled>
-
-            </field>
-
-            
-
-        </block>
+            <filled>
+                <if cond="opcion=='profesor'">
+                    <prompt>
+                        De acuerdo, veamos esto.
+                        <!--break time="2000ms" /-->
+                    </prompt>
+                    <submit next="http://www.http://etsiit-info.42web.io/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
+                    <!--goto next="profesores.vxml"/-->
+                <elseif cond="opcion=='curso'" />
+                    <goto next="cursos.vxml"/>
+                <elseif cond="opcion=='asignatura'" />
+                    <goto next="asignatura.vxml"/>
+                </if>
+            </filled>
+        </field>
     </form>    
 </vxml>
