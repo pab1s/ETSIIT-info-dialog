@@ -27,19 +27,13 @@
             </prompt>
 
             <filled>
-                <prompt>
-                    La gramatica de Pablo va.
-                </prompt>
-        
                 <assign name="numeroTitulo" expr="comprobarGrado(titulacion)"/>
 
                 <if cond="numeroTitulo=='0'">
-                    <prompt>
-                        Algo ha ido mal.
-                    </prompt>
+                    <goto next="#grados_error"/>
                 <elseif cond="numeroTitulo=='1'" />
                     <assign name="grado" expr="'informatica"/>
-                    <prompt> De locos info </prompt>
+                    <prompt> Ha elegido usted el grado en <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='2'" />
                     <assign name="grado" expr="'teleco"/>
                 <elseif cond="numeroTitulo=='3'" />
@@ -72,5 +66,15 @@
                 </if>
             </filled>
         </field>
-    </form>    
+    </form>
+
+    <form id="grados_error">
+        <field name="grado_error">
+            <prompt>Lo siento, no hemos entendido el nombre del grado que queria, asegurese que sea uno de los 4 que se imparten en la ETSIIT. Por favor, vuelva a realizar la llamada</prompt>
+            <noinput>
+                <exit/>
+			</noinput>
+        </field>
+    </form>  
+
 </vxml>
