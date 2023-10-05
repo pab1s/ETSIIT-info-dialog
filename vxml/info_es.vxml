@@ -24,12 +24,17 @@
             </prompt>
 
             <filled>
+                <prompt>
+                    La gramatica de Pablo va.
+                </prompt>
+                <!--
                 <assign name="numeroTitulo" expr="comprobarGrado(titulacion)"/>
 
                 <if cond="numeroTitulo=='1'">
                     <assign name="grado" expr="'mates"/>
                 
                 </if>
+                -->
             </filled>
         </field>
         
