@@ -3,19 +3,37 @@ from bs4 import BeautifulSoup
 import csv
 from unidecode import unidecode
 
-# URL de la página web
-grados_es = ['grado-ingenieria-informatica', 'grado-ingenieria-tecnologias-telecomunicacion',
-             'grado-ingenieria-informatica-matematicas', 'grado-inga-informatica-administ-direcc-empresas']
-url = 'https://www.ugr.es/estudiantes/grados/'
+# Choose the language (es for Spanish, en for English)
+language = 'es'  # Change to 'en' for English
 
-# Diccionario para mapear las abreviaturas de los días a los nombres completos
-dias_abreviaturas = {
-    'L': 'Lunes',
-    'M': 'Martes',
-    'X': 'Miércoles',
-    'J': 'Jueves',
-    'V': 'Viernes'
-}
+# Define URLs based on the selected language
+if language == 'es':
+    base_url = 'https://www.ugr.es/estudiantes/grados/'
+    grados = ['grado-ingenieria-informatica', 'grado-ingenieria-tecnologias-telecomunicacion',
+             'grado-ingenieria-informatica-matematicas', 'grado-inga-informatica-administ-direcc-empresas']
+    # Define days abbreviations for Spanish
+    dias_abreviaturas = {
+        'L': 'Lunes',
+        'M': 'Martes',
+        'X': 'Miercoles',
+        'J': 'Jueves',
+        'V': 'Viernes'
+    }
+elif language == 'en':
+    base_url = 'https://www.ugr.es/en/study/undergraduate/'
+    grados = ['bachelors-degree-computer-engineering-1', 'bachelors-degree-telecommunications-engineering',
+             'gradobachelors-degreein-computer-sciencegradobachelors-degreein-business-administand-managem',
+             'double-grado-computer-engineering-and-mathematics']
+    # Define days abbreviations for English
+    dias_abreviaturas = {
+        'L': 'Monday',
+        'M': 'Tuesday',
+        'X': 'Wednesday',
+        'J': 'Thursday',
+        'V': 'Friday'
+    }
+else:
+    raise ValueError("Invalid language choice. Use 'es' for Spanish or 'en' for English.")
 
 # Define el encabezado del archivo CSV
 csv_header = [
@@ -41,9 +59,9 @@ data.append(csv_header)
 index = 0
 
 # Itera a través de los programas de grado
-for grado in grados_es:
+for grado in grados:
     # Realiza una solicitud GET a la página
-    response = requests.get(url + grado)
+    response = requests.get(base_url + grado)
 
     # Analiza el contenido HTML de la página
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -137,10 +155,8 @@ for grado in grados_es:
                                             'div', class_='otros-datos').text.strip()
                                         info_horario = otros_datos.split('\n')
                                         aula = info_horario[0].split(': ')[1]
-                                        fechas_horario = info_horario[2].split(': ')[
-                                            1]
-                                        horario = info_horario[3].split(': ')[
-                                            1]
+                                        fechas_horario = info_horario[2].split(': ')[1]
+                                        horario = info_horario[3].split(': ')[1]
                                         horario = horario.split(' ')[1::2]
 
                                         # Crea una lista con los datos a guardar en formato CSV
@@ -162,17 +178,22 @@ for grado in grados_es:
                                         # Aplica unidecode a cada cadena en los datos, excepto index y horas
                                         for j in range(len(course_data)):
                                             # Evita aplicar unidecode a index, hora de inicio y hora de fin
-                                            if j not in [0, 8, 9]:
+                                            if j not in [0, 10, 11]:
                                                 if isinstance(course_data[j], str):
-                                                    course_data[j] = unidecode(
-                                                        course_data[j])
+                                                    course_data[j] = unidecode(course_data[j])
 
                                         data.append(course_data)
                                         index += 1
 
-# Guarda los datos en un archivo CSV
-with open('data/ugr_data.csv', 'w', newline='', encoding='utf-8') as csv_file:
+# Define the filename based on the selected language
+if language == 'es':
+    filename = 'data/ugr_data_es.csv'
+    print('Datos guardados en ugr_data_es.csv')
+elif language == 'en':
+    filename = 'data/ugr_data_en.csv'
+    print('Data saved in ugr_data_en.csv')
+
+# Save the data to a CSV file
+with open(filename, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerows(data)
-
-print('Datos guardados en ugr_data.csv')
