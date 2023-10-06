@@ -51,6 +51,14 @@
             Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
             </prompt>
 
+             <help>
+                <throw event="opcion_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="opcion_es"/>
+            </noinput>
+
             <filled>
                 <if cond="opcion=='profesor'">
                     <field name="prof">
