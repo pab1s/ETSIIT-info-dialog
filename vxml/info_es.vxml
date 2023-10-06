@@ -8,7 +8,7 @@
     <script src="scripts/comprobarGrado.js"/>
 
 
-    <var name="grado"/>
+    <var name="grado" expr=""/>
     <var name="numeroTitulo" expr="'0'" />
     <var name="profesor" expr="'Pablo Mesejo Santiago'" />
 
@@ -32,14 +32,14 @@
                 <if cond="numeroTitulo=='0'">
                     <goto next="#grados_error"/>
                 <elseif cond="numeroTitulo=='1'" />
-                    <assign name="grado" expr="'informatica'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria Informatica'"/>
                     <prompt> Ha elegido usted el grado en <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='2'" />
-                    <assign name="grado" expr="'teleco'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria de Tecnologias de Telecomunicacion'"/>
                 <elseif cond="numeroTitulo=='3'" />
-                    <assign name="grado" expr="'mates'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria Informatica y Matematicas'"/>
                 <elseif cond="numeroTitulo=='4'" />
-                    <assign name="grado" expr="'ade'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria Informatica y Administracion y Direccion de Empresas'"/>
                 </if>
                 
             </filled>
@@ -65,12 +65,28 @@
                             <throw event="info_profesores_es"/>
                         </noinput>
                         <filled>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion profesor" fetchtimeout="100s" />
                         </filled>
                     </field>
                     <!--goto next="profesores.vxml"/-->
                 <elseif cond="opcion=='curso'" />
-                    <goto next="cursos.vxml"/>
+                    <field name="cur">
+                        <grammar src="gramaticas/profesores.jsgf"/>
+                        <prompt>Indique el nombre del profesor</prompt>
+
+                        <help>
+                            <throw event="info_profesores_es"/>
+                        </help>
+                        
+                        <noinput>
+                            <throw event="info_profesores_es"/>
+                        </noinput>
+                        <filled>
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion profesor" fetchtimeout="100s" />
+                        </filled>
+                    </field>
+
+                    <!--<goto next="cursos.vxml"/>-->
                 <elseif cond="opcion=='asignatura'" />
                     <goto next="asignatura.vxml"/>
                 </if>
