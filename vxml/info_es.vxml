@@ -32,14 +32,14 @@
                 <if cond="numeroTitulo=='0'">
                     <goto next="#grados_error"/>
                 <elseif cond="numeroTitulo=='1'" />
-                    <assign name="grado" expr="'informatica"/>
+                    <assign name="grado" expr="'informatica'"/>
                     <prompt> Ha elegido usted el grado en <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='2'" />
-                    <assign name="grado" expr="'teleco"/>
+                    <assign name="grado" expr="'teleco'"/>
                 <elseif cond="numeroTitulo=='3'" />
-                    <assign name="grado" expr="'mates"/>
+                    <assign name="grado" expr="'mates'"/>
                 <elseif cond="numeroTitulo=='4'" />
-                    <assign name="grado" expr="'ade"/>
+                    <assign name="grado" expr="'ade'"/>
                 </if>
                 
             </filled>
@@ -57,7 +57,7 @@
                         De acuerdo, veamos esto.
                         <!--break time="2000ms" /-->
                     </prompt>
-                    <submit next="http://www.etsiit-info.42web.io/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
+                    <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
                     <!--goto next="profesores.vxml"/-->
                 <elseif cond="opcion=='curso'" />
                     <goto next="cursos.vxml"/>
