@@ -64,8 +64,36 @@
                 <elseif cond="opcion=='asignatura'" />
                     <goto next="asignatura.vxml"/>
                 </if>
+                <goto next="#f_reiniciar"/>
             </filled>
         </field>
+
+
+    </form>
+
+    <form id="f_reiniciar">
+        <field name="reinicio">
+            <grammar src="grammars/confirmacion.jsgf"/>
+            <prompt>Desea hacer algo mas?</prompt>
+            
+            <filled>
+                <if cond="reinicio=='si'">
+                    <prompt>De acuerdo. Reiniciando el Formulario...</prompt>
+                    <break time="1s"/>
+                    <goto next="#seleccionar_opcion"/>
+                
+                <else/>
+                    
+                    <prompt>Muchas gracias por haber utilizar el servicio, esperamos que haya sido de su agrado.</prompt>
+                    <noinput>
+                        <exit/>
+                    </noinput>
+                </if>
+            
+            </filled>
+            
+        </field>
+    
     </form>
 
     <form id="grados_error">
