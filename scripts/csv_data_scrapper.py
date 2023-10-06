@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
-from unidecode import unidecode  # Importa unidecode
+from unidecode import unidecode
 
 # URL de la página web
 grados_es = ['grado-ingenieria-informatica', 'grado-ingenieria-tecnologias-telecomunicacion',
@@ -31,7 +31,7 @@ csv_header = [
     "dia_de_la_semana",
     "hora_inicio",
     "hora_fin"
-    ]
+]
 
 # Agrega el encabezado a la lista de datos
 data = []
@@ -61,7 +61,8 @@ for grado in grados_es:
         curso = seccion_curso.find('h2').text.strip()
 
         # Obtiene las asignaturas por semestre
-        tabla_semestres = seccion_curso.find_all('table', class_='tabla-semestre')
+        tabla_semestres = seccion_curso.find_all(
+            'table', class_='tabla-semestre')
 
         for tabla in tabla_semestres:
             semestre = tabla.find('caption').text.strip()
@@ -138,7 +139,8 @@ for grado in grados_es:
                                         aula = info_horario[0].split(': ')[1]
                                         fechas_horario = info_horario[2].split(': ')[
                                             1]
-                                        horario = info_horario[3].split(': ')[1]
+                                        horario = info_horario[3].split(': ')[
+                                            1]
                                         horario = horario.split(' ')[1::2]
 
                                         # Crea una lista con los datos a guardar en formato CSV
@@ -157,9 +159,10 @@ for grado in grados_es:
                                             horario[1]+":00"
                                         ]
 
-                                         # Aplica unidecode a cada cadena en los datos, excepto index y horas
+                                        # Aplica unidecode a cada cadena en los datos, excepto index y horas
                                         for j in range(len(course_data)):
-                                            if j not in [0, 8, 9]:  # Evita aplicar unidecode a index, hora de inicio y hora de fin
+                                            # Evita aplicar unidecode a index, hora de inicio y hora de fin
+                                            if j not in [0, 8, 9]:
                                                 if isinstance(course_data[j], str):
                                                     course_data[j] = unidecode(
                                                         course_data[j])
