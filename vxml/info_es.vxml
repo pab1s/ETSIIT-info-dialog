@@ -63,41 +63,13 @@
             <filled>
                 <prompt>Se mete dentro del filled</prompt>
                 <if cond="opcion=='profesor'">
-                    <field name="prof">
-                        <grammar src="grammars/profesores.jsgf"/>
-                        <prompt>Indique el nombre del profesor</prompt>
-
-<!--                        <help>
-                            <throw event="info_profesores_es"/>
-                        </help>
-                        
-                        <noinput>
-                            <throw event="info_profesores_es"/>
-                        </noinput>
-    -->                    <filled>
-                            <prompt> Va a enviar algo </prompt>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
-                        </filled>
-                    </field>
+                    <prompt> Ahora si. </prompt>
+                    <goto next="#f_profesores"/>
                 <elseif cond="opcion=='asignatura'" />
-                    <field name="asig">
-                        <grammar src="grammars/asignaturas.jsgf"/>
-                        <prompt>Indique el nombre de la asignatura</prompt>
-
-<!--                        <help>
-                            <throw event="info_asignaturas_es"/>
-                        </help>
-                        
-                        <noinput>
-                            <throw event="info_asignaturas_es"/>
-                        </noinput>
-    -->                    <filled>
-                            <prompt> Va a enviar algo </prompt>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
-                        </filled>
-                    </field>
+                    <prompt> Ahora si. </prompt>
+                    <goto next="#f_asignaturas"/>
                 <elseif cond="opcion=='curso'" />
-                    <goto next="asignatura.vxml"/>
+                    <goto next="#f_reiniciar"/>
                 </if>
                 <goto next="#f_reiniciar"/>
             </filled>
@@ -127,6 +99,49 @@
             
         </field>
     
+    </form>
+
+    <form id="f_profesores">
+        <field name="prof">
+            <grammar src="grammars/profesores.jsgf"/>
+            <prompt>Indique el nombre del profesor</prompt>
+
+<!--                        <help>
+                <throw event="info_profesores_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="info_profesores_es"/>
+            </noinput>
+-->                  
+            <filled>
+                <prompt> Va a enviar algo </prompt>
+                <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
+            </filled>
+        </field>
+    </form>
+
+    <form id="f_asignaturas">
+        <field name="asig">
+            <grammar src="grammars/asignaturas.jsgf"/>
+            <prompt>Indique el nombre de la asignatura</prompt>
+
+<!--                        <help>
+                <throw event="info_asignaturas_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="info_asignaturas_es"/>
+            </noinput>
+-->                    <filled>
+                <prompt> Va a enviar algo </prompt>
+                <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
+            </filled>
+        </field>
+    </form>
+
+    <form id="f_curso">
+        <goto next="asignatura.vxml"/>
     </form>
 
     <form id="grados_error">
