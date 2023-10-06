@@ -5,6 +5,11 @@
         <prompt>El curso tiene que ser de de alguno de los grados de la ETSIIT</prompt>
         <reprompt/>
     </catch>
+
+    <catch event="info_profesores_es">
+        <prompt>Debe indicar nombre y apellidos de un profesor de la ETSIIT</prompt>
+        <reprompt/>
+    </catch>
 <!--
     <catch event="info_facultades">
         <prompt>Este servicio solo proporciona reservas para las facultades de informatica, bellas artes y medicina</prompt>
