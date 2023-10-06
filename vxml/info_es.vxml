@@ -54,7 +54,7 @@
             <filled>
                 <if cond="opcion=='profesor'">
                     <field name="prof">
-                        <grammar src="gramaticas/profesores.jsgf"/>
+                        <grammar src="grammars/profesores.jsgf"/>
                         <prompt>Indique el nombre del profesor</prompt>
 
                         <help>
@@ -71,15 +71,15 @@
                     <!--goto next="profesores.vxml"/-->
                 <elseif cond="opcion=='curso'" />
                     <field name="cur">
-                        <grammar src="gramaticas/profesores.jsgf"/>
-                        <prompt>Indique el nombre del profesor</prompt>
+                        <grammar src="grammars/asignaturas.jsgf"/>
+                        <prompt>Indique el nombre de la asignatura</prompt>
 
                         <help>
-                            <throw event="info_profesores_es"/>
+                            <throw event="info_cursos_es"/>
                         </help>
                         
                         <noinput>
-                            <throw event="info_profesores_es"/>
+                            <throw event="info_cursos_es"/>
                         </noinput>
                         <filled>
                             <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion profesor" fetchtimeout="100s" />
