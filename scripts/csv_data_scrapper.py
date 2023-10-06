@@ -3,62 +3,64 @@ from bs4 import BeautifulSoup
 import csv
 from unidecode import unidecode  # Importa unidecode
 
-# URL of the webpage
+# URL de la página web
 grados_es = ['grado-ingenieria-informatica', 'grado-ingenieria-tecnologias-telecomunicacion',
              'grado-ingenieria-informatica-matematicas', 'grado-inga-informatica-administ-direcc-empresas']
 url = 'https://www.ugr.es/estudiantes/grados/'
 
-# Dictionary to map day abbreviations to full names
+# Diccionario para mapear las abreviaturas de los días a los nombres completos
 dias_abreviaturas = {
     'L': 'Lunes',
     'M': 'Martes',
-    'X': 'Miercoles',
+    'X': 'Miércoles',
     'J': 'Jueves',
     'V': 'Viernes'
 }
 
-# Define the CSV file header
+# Define el encabezado del archivo CSV
 csv_header = [
-    "Indice",
-    "Titulacion",
-    "Asignatura",
-    "Curso",
-    "Semestre",
-    "Grupo",
-    "Profesor",
-    "Dia de la semana",
-    "Hora inicio",
-    "Hora fin"
-]
+    "indice",
+    "titulacion",
+    "asignatura",
+    "especialidad",
+    "curso",
+    "semestre",
+    "grupo",
+    "tipo_de_grupo",
+    "profesor",
+    "dia_de_la_semana",
+    "hora_inicio",
+    "hora_fin"
+    ]
 
-# Add the header to the data list
+# Agrega el encabezado a la lista de datos
 data = []
 data.append(csv_header)
 
-# Create index
+# Crea un índice
 index = 0
 
-# Iterate through degree programs
+# Itera a través de los programas de grado
 for grado in grados_es:
-    # Perform a GET request to the page
-    response = requests.get(url+grado)
+    # Realiza una solicitud GET a la página
+    response = requests.get(url + grado)
 
-    # Parse the HTML content of the page
+    # Analiza el contenido HTML de la página
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Obtain the h1 header, which is the name of the degree program
+    # Obtiene el encabezado h1, que es el nombre del programa de grado
     nombre_titulacion = soup.find('h1', class_='page-title').text.strip()
 
-    # Find all course sections
+    # Encuentra todas las secciones de cursos
     secciones_cursos = soup.find_all(
         'div', class_='block-views-blockpeople-subject-asignatura-persona')
 
-    # Iterate through course sections
+    # Itera a través de las secciones de cursos
     for seccion_curso in secciones_cursos:
-        # Get the course number
-        numero_curso = seccion_curso.find('h2').text.strip()
+        # Obtiene el número del curso
+        curso = seccion_curso.find('h2').text.strip()
 
-        # Get the subjects by semester
+        # Obtiene las asignaturas por semestre
         tabla_semestres = seccion_curso.find_all('table', class_='tabla-semestre')
 
         for tabla in tabla_semestres:
@@ -67,17 +69,33 @@ for grado in grados_es:
             asignaturas = tabla.find_all('td', class_='asignatura')
 
             for asignatura in asignaturas:
-                # Get the link to the subject
+                # Obtiene el enlace a la asignatura
                 enlace_asignatura = asignatura.a['href']
 
-                # Perform a GET request to the subject link
+                # Obtiene el contenido de la asignatura
+                asignatura = asignatura.text.strip()
+
+                # Obtiene la especialidad de la asignatura
+                inicio = asignatura.find('(')
+                fin = asignatura.find(')', inicio)
+
+                if inicio != -1 and fin != -1:
+                    especialidad = asignatura[inicio + 1:fin]
+                    asignatura = asignatura[:inicio] + asignatura[fin + 1:]
+                else:
+                    especialidad = ''
+
+                # Elimina espacios en blanco repetidos
+                asignatura = ' '.join(asignatura.split())
+
+                # Realiza una solicitud GET al enlace de la asignatura
                 response_asignatura = requests.get(enlace_asignatura)
 
-                # Parse the HTML content of the subject page
+                # Analiza el contenido HTML de la página de la asignatura
                 soup_asignatura = BeautifulSoup(
                     response_asignatura.text, 'html.parser')
 
-                # Find the professor section
+                # Encuentra la sección de profesorado
                 seccion_profesorado = soup_asignatura.find_all(
                     'div', class_='profesorado-asignatura')
 
@@ -90,26 +108,26 @@ for grado in grados_es:
                         grupos = profesor.find(
                             'span', class_='grupos').text.strip().split()[-1]
 
-                        # Find the schedule section
+                        # Encuentra la sección de horarios
                         seccion_horarios = soup_asignatura.find(
                             'div', class_='horario')
 
                         if seccion_horarios:
-                            # Find all schedule rows
+                            # Encuentra todas las filas de horarios
                             filas_horarios = seccion_horarios.find_all('tr')
 
-                            # Get the names of the days of the week
+                            # Obtiene los nombres de los días de la semana
                             dias_semana = []
                             for dia in filas_horarios[0].find_all('div', class_='dia-red'):
                                 dia_abreviatura = dia.text.strip()
                                 dias_semana.append(dia_abreviatura)
 
-                            # Iterate through schedule rows
+                            # Itera a través de las filas de horarios
                             for fila in filas_horarios[1:]:
-                                # Get the schedule cells
+                                # Obtiene las celdas de horario
                                 celdas_horario = fila.find_all('td')
 
-                                # Iterate through schedule cells
+                                # Itera a través de las celdas de horario
                                 for i, celda in enumerate(celdas_horario):
                                     if celda.find('div', class_='clase'):
                                         grupo = celda.find(
@@ -123,12 +141,13 @@ for grado in grados_es:
                                         horario = info_horario[3].split(': ')[1]
                                         horario = horario.split(' ')[1::2]
 
-                                        # Create a list with the data to be saved in CSV format
+                                        # Crea una lista con los datos a guardar en formato CSV
                                         course_data = [
                                             index,
                                             nombre_titulacion,
-                                            asignatura.text.strip(),
-                                            numero_curso,
+                                            asignatura,
+                                            especialidad,
+                                            curso,
                                             semestre,
                                             grupo,
                                             tipo_profesorado,
@@ -142,17 +161,15 @@ for grado in grados_es:
                                         for j in range(len(course_data)):
                                             if j not in [0, 8, 9]:  # Evita aplicar unidecode a index, hora de inicio y hora de fin
                                                 if isinstance(course_data[j], str):
-                                                    course_data[j] = unidecode(course_data[j])
-
+                                                    course_data[j] = unidecode(
+                                                        course_data[j])
 
                                         data.append(course_data)
                                         index += 1
 
-                                        
-
-# Save data to a CSV file
+# Guarda los datos en un archivo CSV
 with open('data/ugr_data.csv', 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerows(data)
 
-print('Data saved to ugr_data.csv')
+print('Datos guardados en ugr_data.csv')
