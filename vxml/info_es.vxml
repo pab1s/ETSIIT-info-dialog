@@ -82,7 +82,7 @@
                             <throw event="info_cursos_es"/>
                         </noinput>
                         <filled>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion profesor" fetchtimeout="100s" />
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion curso" fetchtimeout="100s" />
                         </filled>
                     </field>
 
