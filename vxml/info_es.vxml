@@ -69,20 +69,20 @@
                         </filled>
                     </field>
                     <!--goto next="profesores.vxml"/-->
-                <elseif cond="opcion=='curso'" />
-                    <field name="cur">
+                <elseif cond="opcion=='asignatura'" />
+                    <field name="asig">
                         <grammar src="grammars/asignaturas.jsgf"/>
                         <prompt>Indique el nombre de la asignatura</prompt>
 
                         <help>
-                            <throw event="info_cursos_es"/>
+                            <throw event="info_asignaturas_es"/>
                         </help>
                         
                         <noinput>
-                            <throw event="info_cursos_es"/>
+                            <throw event="info_asignaturas_es"/>
                         </noinput>
                         <filled>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion curso" fetchtimeout="100s" />
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion asignatura" fetchtimeout="100s" />
                         </filled>
                     </field>
 
