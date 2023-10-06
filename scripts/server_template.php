@@ -2,9 +2,10 @@
 // Set the content type to VoiceXML
 header('Content-type: application/voicexml+xml');
 
-// Get the day of the week from the VXML POST request
-$profesor = $_POST['profesor'];
+// Get the input parameters from the VXML POST request
+$profesor = isset($_POST['profesor']) ? $_POST['profesor'] : 'Pablo Mesejo Santiago';
 
+// Connect to the database
 $serverName = "sql11.freesqldatabase.com";
 $database = "sql11650278";
 $username = "sql11650278";
