@@ -3,7 +3,7 @@
 header('Content-type: application/voicexml+xml');
 
 // Get the day of the week from the VXML POST request
-$profesor = "Pablo Mesejo Santiago"; // $_POST['profesor'];
+$profesor = $_POST['profesor'];
 
 $serverName = "sql11.freesqldatabase.com";
 $database = "sql11650278";
