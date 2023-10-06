@@ -42,7 +42,7 @@ function executeQuery($conn, $sql, $params) {
 
 // Handle different query scenarios based on input parameters
 if (!empty($titulacion) && !empty($asignatura)) {
-    // titulacion and Asignatura -> Profesores y Grupos
+    // Titulacion and Asignatura -> Profesores y Grupos
     $sql = "SELECT profesor, grupo FROM ugr_courses WHERE titulacion = :titulacion AND asignatura = :asignatura";
     $params = [':titulacion' => $titulacion, ':asignatura' => $asignatura];
     $results = executeQuery($conn, $sql, $params);
@@ -56,7 +56,7 @@ if (!empty($titulacion) && !empty($asignatura)) {
         $response = "Lo siento, no se encontraron resultados para $titulacion y $asignatura.";
     }
 } elseif (!empty($titulacion) && !empty($profesor)) {
-    // titulacion and Profesor -> Asignaturas y Grupos
+    // Titulacion and Profesor -> Asignaturas y Grupos
     $sql = "SELECT asignatura, grupo FROM ugr_courses WHERE titulacion = :titulacion AND profesor = :profesor";
     $params = [':titulacion' => $titulacion, ':profesor' => $profesor];
     $results = executeQuery($conn, $sql, $params);
@@ -70,7 +70,7 @@ if (!empty($titulacion) && !empty($asignatura)) {
         $response = "Lo siento, no se encontraron resultados para $titulacion y el profesor $profesor.";
     }
 } elseif (!empty($titulacion) && !empty($asignatura) && !empty($grupo)) {
-    // titulacion, Asignatura, and Grupo -> Horario
+    // Titulacion, Asignatura, and Grupo -> Horario
     $sql = "SELECT dia_de_la_semana, hora_inicio, hora_fin FROM ugr_courses WHERE titulacion = :titulacion AND asignatura = :asignatura AND grupo = :grupo";
     $params = [':titulacion' => $titulacion, ':asignatura' => $asignatura, ':grupo' => $grupo];
     $results = executeQuery($conn, $sql, $params);
@@ -84,7 +84,7 @@ if (!empty($titulacion) && !empty($asignatura)) {
         $response = "Lo siento, no se encontraron resultados para $titulacion, $asignatura y el grupo $grupo.";
     }
 } elseif (!empty($titulacion) && !empty($curso)) {
-    // titulacion and Curso -> Asignaturas
+    // Titulacion and Curso -> Asignaturas
     $sql = "SELECT DISTINCT asignatura FROM ugr_courses WHERE titulacion = :titulacion AND curso = :curso";
     $params = [':titulacion' => $titulacion, ':curso' => $curso];
     $results = executeQuery($conn, $sql, $params);
