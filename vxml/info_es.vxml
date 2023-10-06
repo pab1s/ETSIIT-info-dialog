@@ -10,7 +10,7 @@
 
     <var name="grado"/>
     <var name="numeroTitulo" expr="'0'" />
-    <var name="profesor" expr="'David Cabezas Berrido'" />
+    <var name="profesor" expr="'Pablo Mesejo Santiago'" />
 
     <form id="seleccionar_opcion">
         <block>
