@@ -48,7 +48,7 @@
         <field name="opcion">
             <grammar src="grammars/option_es.jsgf"/>
             <prompt>
-            Le podemos ofrecer informacion acerca de algun CURSO o ASIGNATURA.
+            Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
             </prompt>
 
             <filled>
