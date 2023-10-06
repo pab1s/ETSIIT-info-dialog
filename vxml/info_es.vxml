@@ -48,54 +48,55 @@
         <field name="opcion">
             <grammar src="grammars/option_es.jsgf"/>
             <prompt>
-            Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
+                Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
             </prompt>
 
+<!--
              <help>
                 <throw event="opcion_es"/>
             </help>
-            
+
             <noinput>
                 <throw event="opcion_es"/>
             </noinput>
-
+-->
             <filled>
+                <prompt>Se mete dentro del filled</prompt>
                 <if cond="opcion=='profesor'">
                     <field name="prof">
                         <grammar src="grammars/profesores.jsgf"/>
                         <prompt>Indique el nombre del profesor</prompt>
 
-                        <help>
+<!--                        <help>
                             <throw event="info_profesores_es"/>
                         </help>
                         
                         <noinput>
                             <throw event="info_profesores_es"/>
                         </noinput>
-                        <filled>
+    -->                    <filled>
+                            <prompt> Va a enviar algo </prompt>
                             <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
                         </filled>
                     </field>
-                    <!--goto next="profesores.vxml"/-->
                 <elseif cond="opcion=='asignatura'" />
                     <field name="asig">
                         <grammar src="grammars/asignaturas.jsgf"/>
                         <prompt>Indique el nombre de la asignatura</prompt>
 
-                        <help>
+<!--                        <help>
                             <throw event="info_asignaturas_es"/>
                         </help>
                         
                         <noinput>
                             <throw event="info_asignaturas_es"/>
                         </noinput>
-                        <filled>
+    -->                    <filled>
+                            <prompt> Va a enviar algo </prompt>
                             <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
                         </filled>
                     </field>
-
-                    <!--<goto next="cursos.vxml"/>-->
-                <elseif cond="opcion=='asignatura'" />
+                <elseif cond="opcion=='curso'" />
                     <goto next="asignatura.vxml"/>
                 </if>
                 <goto next="#f_reiniciar"/>
