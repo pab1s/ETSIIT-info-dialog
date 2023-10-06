@@ -1,5 +1,5 @@
 CONSULTAS
-grado asig -> profs con grupo
-profesor grado -> asig con grupo
+grado asig -> profs y grupos
+gradp profesor -> asig y grupos
 grado asig grupo -> horario
-curso y grado -> asignaturas
+grado curso -> asignaturas
