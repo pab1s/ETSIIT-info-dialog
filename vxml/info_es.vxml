@@ -65,7 +65,7 @@
                             <throw event="info_profesores_es"/>
                         </noinput>
                         <filled>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion profesor" fetchtimeout="100s" />
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
                         </filled>
                     </field>
                     <!--goto next="profesores.vxml"/-->
@@ -82,7 +82,7 @@
                             <throw event="info_asignaturas_es"/>
                         </noinput>
                         <filled>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="titulacion asignatura" fetchtimeout="100s" />
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
                         </filled>
                     </field>
 
