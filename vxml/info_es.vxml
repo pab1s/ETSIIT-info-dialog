@@ -8,7 +8,7 @@
     <script src="scripts/comprobarGrado.js"/>
 
 
-    <var name="grado"/>
+    <var name="grado" expr=""/>
     <var name="numeroTitulo" expr="'0'" />
     <var name="profesor" expr="'Pablo Mesejo Santiago'" />
 
@@ -32,14 +32,14 @@
                 <if cond="numeroTitulo=='0'">
                     <goto next="#grados_error"/>
                 <elseif cond="numeroTitulo=='1'" />
-                    <assign name="grado" expr="'informatica'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria Informatica'"/>
                     <prompt> Ha elegido usted el grado en <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='2'" />
-                    <assign name="grado" expr="'teleco'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria de Tecnologias de Telecomunicacion'"/>
                 <elseif cond="numeroTitulo=='3'" />
-                    <assign name="grado" expr="'mates'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria Informatica y Matematicas'"/>
                 <elseif cond="numeroTitulo=='4'" />
-                    <assign name="grado" expr="'ade'"/>
+                    <assign name="grado" expr="'Grado en Ingenieria Informatica y Administracion y Direccion de Empresas'"/>
                 </if>
                 
             </filled>
@@ -51,10 +51,18 @@
             Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
             </prompt>
 
+             <help>
+                <throw event="opcion_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="opcion_es"/>
+            </noinput>
+
             <filled>
                 <if cond="opcion=='profesor'">
                     <field name="prof">
-                        <grammar src="gramaticas/profesores.jsgf"/>
+                        <grammar src="grammars/profesores.jsgf"/>
                         <prompt>Indique el nombre del profesor</prompt>
 
                         <help>
@@ -65,12 +73,28 @@
                             <throw event="info_profesores_es"/>
                         </noinput>
                         <filled>
-                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="profesor" fetchtimeout="100s" />
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
                         </filled>
                     </field>
                     <!--goto next="profesores.vxml"/-->
-                <elseif cond="opcion=='curso'" />
-                    <goto next="cursos.vxml"/>
+                <elseif cond="opcion=='asignatura'" />
+                    <field name="asig">
+                        <grammar src="grammars/asignaturas.jsgf"/>
+                        <prompt>Indique el nombre de la asignatura</prompt>
+
+                        <help>
+                            <throw event="info_asignaturas_es"/>
+                        </help>
+                        
+                        <noinput>
+                            <throw event="info_asignaturas_es"/>
+                        </noinput>
+                        <filled>
+                            <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
+                        </filled>
+                    </field>
+
+                    <!--<goto next="cursos.vxml"/>-->
                 <elseif cond="opcion=='asignatura'" />
                     <goto next="asignatura.vxml"/>
                 </if>

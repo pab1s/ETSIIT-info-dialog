@@ -2,4 +2,4 @@
 
 grammar opcion_es;
 
-public <opcion_es> = curso | asignatura | cursos | asignaturas;
+public <opcion_es> = curso | asignatura | cursos | asignaturas | profesor | profesores;
