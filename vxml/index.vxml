@@ -9,8 +9,8 @@
 
   <menu>
     <prompt count="1" bargein="true"> <value expr="saludo()"/>
-      Bienvenido a la Escuela Tecnica y Superior de Ingenieria Informatica y 
-      Telecomunicaciones de la Universidad de Granada. Por favor, elija su idioma:
+      Bienvenido a la Escuela Tecnica Superior de Ingenierias Informatica y de
+      Telecomunicacion de la Universidad de Granada. Por favor, elija su idioma:
       <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
     </prompt>
     <prompt>
