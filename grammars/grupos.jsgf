@@ -5,4 +5,4 @@ grammar grupos;
 public <grupos> = <letras> | <numeros>
 
 <letras> = A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z;
-<numeros> = uno | dos | tres | cuatro | cinco | seis | siete | ocho | nueve | diez | once | doce | trece | catorce | quince | dieciséis | diecisiete | dieciocho | diecinueve | veinte | veintiuno | veintidós | veintitrés | veinticuatro | veinticinco | veintiséis | veintisiete | veintiocho | veintinueve | treinta;
+<numeros> = uno | dos | tres | cuatro | cinco | seis | siete | ocho | nueve | diez | once | doce | trece | catorce | quince | dieciseis | diecisiete | dieciocho | diecinueve | veinte | veintiuno | veintidos | veintitres | veinticuatro | veinticinco | veintiseis | veintisiete | veintiocho | veintinueve | treinta;
