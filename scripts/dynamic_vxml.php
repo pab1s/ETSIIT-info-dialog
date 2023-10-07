@@ -3,11 +3,11 @@
 header('Content-type: application/voicexml+xml');
 
 // Get the input parameters from the VXML POST request
-$titulacion = isset($_POST['titulacion']) ? $_POST['titulacion'] : '';
-$asignatura = isset($_POST['asignatura']) ? $_POST['asignatura'] : '';
+$grado = isset($_POST['grado']) ? $_POST['grado'] : 'Grado en Ingenieria Informatica y Matematicas';
+$asignatura = isset($_POST['asignatura']) ? $_POST['asignatura'] : 'Curvas y Superficies';
 $curso = isset($_POST['curso']) ? $_POST['curso'] : '';
 $profesor = isset($_POST['profesor']) ? $_POST['profesor'] : '';
-$grupo = isset($_POST['grupo']) ? $_POST['grupo'] : '';
+$grupo = isset($_POST['grupo']) ? $_POST['grupo'] : 'A';
 
 // Database connection details
 $serverName = "sql11.freesqldatabase.com";
@@ -41,61 +41,61 @@ function executeQuery($conn, $sql, $params) {
 }
 
 // Handle different query scenarios based on input parameters
-if (!empty($titulacion) && !empty($asignatura)) {
+if (!empty($grado) && !empty($asignatura) && empty($grupo)) {
     // Titulacion and Asignatura -> Profesores y Grupos
-    $sql = "SELECT profesor, grupo FROM ugr_courses WHERE titulacion = :titulacion AND asignatura = :asignatura";
-    $params = [':titulacion' => $titulacion, ':asignatura' => $asignatura];
+    $sql = "SELECT DISTINCT profesor, grupo FROM etsiit_courses WHERE titulacion = :grado AND asignatura = :asignatura";
+    $params = [':grado' => $grado, ':asignatura' => $asignatura];
     $results = executeQuery($conn, $sql, $params);
 
     if (count($results) > 0) {
-        $response = "Los profesores y grupos para $titulacion y $asignatura son:";
+        $response = "Los profesores y grupos para $grado y $asignatura son:";
         foreach ($results as $row) {
             $response .= " Profesor: " . $row['profesor'] . ", Grupo: " . $row['grupo'];
         }
     } else {
-        $response = "Lo siento, no se encontraron resultados para $titulacion y $asignatura.";
+        $response = "Lo siento, no se encontraron resultados para $grado y $asignatura.";
     }
-} elseif (!empty($titulacion) && !empty($profesor)) {
+} elseif (!empty($grado) && !empty($profesor)) {
     // Titulacion and Profesor -> Asignaturas y Grupos
-    $sql = "SELECT asignatura, grupo FROM ugr_courses WHERE titulacion = :titulacion AND profesor = :profesor";
-    $params = [':titulacion' => $titulacion, ':profesor' => $profesor];
+    $sql = "SELECT DISTINCT asignatura, grupo FROM etsiit_courses WHERE titulacion = :grado AND profesor = :profesor";
+    $params = [':grado' => $grado, ':profesor' => $profesor];
     $results = executeQuery($conn, $sql, $params);
 
     if (count($results) > 0) {
-        $response = "Las asignaturas y grupos para $titulacion y el profesor $profesor son:";
+        $response = "Las asignaturas y grupos para $grado y el profesor $profesor son:";
         foreach ($results as $row) {
             $response .= " Asignatura: " . $row['asignatura'] . ", Grupo: " . $row['grupo'];
         }
     } else {
-        $response = "Lo siento, no se encontraron resultados para $titulacion y el profesor $profesor.";
+        $response = "Lo siento, no se encontraron resultados para $grado y el profesor $profesor.";
     }
-} elseif (!empty($titulacion) && !empty($asignatura) && !empty($grupo)) {
+} elseif (!empty($grado) && !empty($asignatura) && !empty($grupo)) {
     // Titulacion, Asignatura, and Grupo -> Horario
-    $sql = "SELECT dia_de_la_semana, hora_inicio, hora_fin FROM ugr_courses WHERE titulacion = :titulacion AND asignatura = :asignatura AND grupo = :grupo";
-    $params = [':titulacion' => $titulacion, ':asignatura' => $asignatura, ':grupo' => $grupo];
+    $sql = "SELECT DISTINCT dia_de_la_semana, TIME_FORMAT(hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(hora_fin, '%H:%i') AS hora_fin FROM etsiit_courses WHERE titulacion = :grado AND asignatura = :asignatura AND grupo = :grupo";
+    $params = [':grado' => $grado, ':asignatura' => $asignatura, ':grupo' => $grupo];
     $results = executeQuery($conn, $sql, $params);
 
     if (count($results) > 0) {
-        $response = "El horario para $titulacion, $asignatura y el grupo $grupo es:";
+        $response = "El horario para $grado, $asignatura y el grupo $grupo es:";
         foreach ($results as $row) {
-            $response .= " Día: " . $row['dia_de_la_semana'] . ", Hora Inicio: " . $row['hora_inicio'] . ", Hora Fin: " . $row['hora_fin'];
+            $response .= " Dia: " . $row['dia_de_la_semana'] . ", Hora Inicio: " . $row['hora_inicio'] . ", Hora Fin: " . $row['hora_fin'];
         }
     } else {
-        $response = "Lo siento, no se encontraron resultados para $titulacion, $asignatura y el grupo $grupo.";
+        $response = "Lo siento, no se encontraron resultados para $grado, $asignatura y el grupo $grupo.";
     }
-} elseif (!empty($titulacion) && !empty($curso)) {
+} elseif (!empty($grado) && !empty($curso)) {
     // Titulacion and Curso -> Asignaturas
-    $sql = "SELECT DISTINCT asignatura FROM ugr_courses WHERE titulacion = :titulacion AND curso = :curso";
-    $params = [':titulacion' => $titulacion, ':curso' => $curso];
+    $sql = "SELECT DISTINCT asignatura FROM etsiit_courses WHERE titulacion = :grado AND curso = :curso";
+    $params = [':grado' => $grado, ':curso' => $curso];
     $results = executeQuery($conn, $sql, $params);
 
     if (count($results) > 0) {
-        $response = "Las asignaturas para $titulacion y el curso $curso son:";
+        $response = "Las asignaturas para $grado y el curso $curso son:";
         foreach ($results as $row) {
             $response .= " " . $row['asignatura'];
         }
     } else {
-        $response = "Lo siento, no se encontraron asignaturas para $titulacion y el curso $curso.";
+        $response = "Lo siento, no se encontraron asignaturas para $grado y el curso $curso.";
     }
 } else {
     $response = "Por favor, proporciona parámetros válidos para la consulta.";
