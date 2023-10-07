@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml" application="eventos.xml">
+<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">
 
 <!-- SI LOS EVENTOS NO FUNCIONAN PONER DESPUES DE XMLNS application eventos.xml-->
     <link event="help">
@@ -60,13 +60,13 @@
             </prompt>
 
 <!--    LOS HELP Y NOINPUt NO SABEMOS SI FUNCIONAN PERO NO DEBERIAN IR MAL (hay varios en el documento) -->
-             <help>
+<!--             <help>
                 <throw event="opcion_es"/>
             </help>
 
             <noinput>
                 <throw event="opcion_es"/>
-            </noinput>
+            </noinput>-->
 
             <filled>
                 <if cond="opcion=='profesor'">
@@ -122,14 +122,14 @@
             <grammar src="grammars/profesores.jsgf"/>
             <prompt>Indique el nombre del profesor</prompt>
 
-            <help>
+<!--            <help>
                 <throw event="info_profesores_es"/>
             </help>
             
             <noinput>
                 <throw event="info_profesores_es"/>
             </noinput>
-                 
+        -->               
             <filled>
                 <assign name="profesor" expr="prof"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
@@ -142,14 +142,14 @@
             <grammar src="grammars/asignaturas.jsgf"/>
             <prompt>Indique el nombre de la asignatura</prompt>
 
-            <help>
+<!--            <help>
                 <throw event="info_asignaturas_es"/>
             </help>
             
             <noinput>
                 <throw event="info_asignaturas_es"/>
             </noinput>
-
+        -->
             <filled>
                 <assign name="asignatura" expr="asig"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
@@ -162,14 +162,14 @@
             <grammar src="grammars/numeroCursos.jsgf"/>
             <prompt>Indique el curso que desea consultar.</prompt>
 
-            <help>
+<!--            <help>
                 <throw event="info_cursos_es"/>
             </help>
             
             <noinput>
                 <throw event="info_cursos_es"/>
             </noinput>
-
+        -->
             <filled>
                 <assign name="curso" expr="numeroCurso"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado curso" fetchtimeout="100s" />
@@ -182,14 +182,14 @@
             <grammar src="grammars/asignaturas.jsgf"/>
             <prompt>Indique el nombre de la asignatura sobre la que desea consultar el horario.</prompt>
 
-            <help>
+<!--            <help>
                 <throw event="info_asignaturas_es"/>
             </help>
             
             <noinput>
                 <throw event="info_asignaturas_es"/>
             </noinput>
-
+        -->
             <filled>
                 <assign name="asignatura" expr="asig2"/>
             </filled>
@@ -199,14 +199,14 @@
             <grammar src="grammars/grupos.jsgf"/>
             <prompt>Indique el grupo de <value expr="asignatura"/> del que desea consultar el horario.</prompt>
 
-            <help>
+ <!--           <help>
                 <throw event="info_grupos_es"/>
             </help>
             
             <noinput>
                 <throw event="info_grupos_es"/>
             </noinput>
-
+        -->
             <filled>
                 <!-- A lo mejor esto da error por como la he hecho miradla por si acaso, devuelve 1,2,3 con el numero en letra reconocido o si no lo q tenia el field-->
                 <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
