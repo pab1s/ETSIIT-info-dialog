@@ -1,5 +1,0 @@
-#JSGF V1.0;
-
-grammar opcion_es;
-
-public <opcion_es> = curso | asignatura | cursos | asignaturas | profesor | profesores;

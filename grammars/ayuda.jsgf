@@ -2,4 +2,4 @@
 
 grammar ayuda;
 
-public <ayuda> = ayuda | que digo;
+public <ayuda> = [necesito] ayuda | ayudame | que digo;
