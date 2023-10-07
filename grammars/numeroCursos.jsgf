@@ -1,0 +1,5 @@
+#JSGF V1.0;
+
+grammar numeroCursos;
+
+public <numeroCursos> = Primer curso | Segundo curso | Tercer curso | Cuarto curso | Quinto curso;

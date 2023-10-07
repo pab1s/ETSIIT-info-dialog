@@ -2,12 +2,17 @@
 <vxml version="2.1" xml:lang="es-ES">
 
     <catch event="info_cursos_es">
-        <prompt>El curso tiene que ser de de alguno de los grados de la ETSIIT</prompt>
+        <prompt>El curso tiene que ser de de alguno de los grados de la ETSIIT, un ejemplo es Fundamentos de la Programacion.</prompt>
         <reprompt/>
     </catch>
 
     <catch event="info_profesores_es">
-        <prompt>Debe indicar nombre y apellidos de un profesor de la ETSIIT</prompt>
+        <prompt>Debe indicar nombre y ambos apellidos de un profesor de la ETSIIT.</prompt>
+        <reprompt/>
+    </catch>
+
+    <catch event="info_cursos_es">
+        <prompt>Debe indicar el curso, pruebe con Primer curso, Segundo curso, Tercer curso, Cuarto curso o Quinto curso.</prompt>
         <reprompt/>
     </catch>
 

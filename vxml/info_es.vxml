@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">
 
+<!-- SI LOS EVENTOS NO FUNCIONAN PONER DESPUES DE XMLNS application eventos.xml-->
     <link event="help">
         <grammar src="grammars/ayuda.jsgf"/>
     </link>
@@ -11,6 +12,8 @@
     <var name="grado" expr=""/>
     <var name="numeroTitulo" expr="'0'" />
     <var name="profesor" expr="'Pablo Mesejo Santiago'" />
+    <var name="asignatura" expr="'Fundamentos de la Progrmacion'" />
+    <var name="curso" expr="'Primer Curso'" />
 
     <form id="seleccionar_opcion">
         <block>
@@ -33,13 +36,16 @@
                     <goto next="#grados_error"/>
                 <elseif cond="numeroTitulo=='1'" />
                     <assign name="grado" expr="'Grado en Ingenieria Informatica'"/>
-                    <prompt> Ha elegido usted el grado en <value expr="grado"/>. </prompt>
+                    <prompt> Ha elegido usted el <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='2'" />
                     <assign name="grado" expr="'Grado en Ingenieria de Tecnologias de Telecomunicacion'"/>
+                    <prompt> Ha elegido usted el <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='3'" />
                     <assign name="grado" expr="'Grado en Ingenieria Informatica y Matematicas'"/>
+                    <prompt> Ha elegido usted el <value expr="grado"/>. </prompt>
                 <elseif cond="numeroTitulo=='4'" />
                     <assign name="grado" expr="'Grado en Ingenieria Informatica y Administracion y Direccion de Empresas'"/>
+                    <prompt> Ha elegido usted el <value expr="grado"/>. </prompt>
                 </if>
                 
             </filled>
@@ -51,7 +57,7 @@
                 Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
             </prompt>
 
-<!--
+<!--    LOS HELP Y NOINPUt NO SABEMOS SI FUNCIONAN PERO NO DEBERIAN IR MAL (hay varios en el documento) -->
              <help>
                 <throw event="opcion_es"/>
             </help>
@@ -59,18 +65,22 @@
             <noinput>
                 <throw event="opcion_es"/>
             </noinput>
--->
+
             <filled>
-                <prompt>Se mete dentro del filled</prompt>
                 <if cond="opcion=='profesor'">
-                    <prompt> Ahora si. </prompt>
                     <goto next="#f_profesores"/>
                 <elseif cond="opcion=='asignatura'" />
-                    <prompt> Ahora si. </prompt>
                     <goto next="#f_asignaturas"/>
                 <elseif cond="opcion=='curso'" />
-                    <goto next="#f_reiniciar"/>
+                    <goto next="#f_cursos"/>
+                <elseif cond="opcion=='profesores'" />
+                    <goto next="#f_profesores"/>
+                <elseif cond="opcion=='cursos'" />
+                    <goto next="#f_cursos"/>
+                <elseif cond="opcion=='asignaturas'" />
+                    <goto next="#f_asignaturas"/>
                 </if>
+                <!-- Reiniciamos el formulario despues de hacer una connsulta -->
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -106,17 +116,16 @@
             <grammar src="grammars/profesores.jsgf"/>
             <prompt>Indique el nombre del profesor</prompt>
 
-<!--                        <help>
+            <help>
                 <throw event="info_profesores_es"/>
             </help>
             
             <noinput>
                 <throw event="info_profesores_es"/>
             </noinput>
--->                  
+                 
             <filled>
                 <assign name="profesor" expr="prof"/>
-                <prompt> Va a enviar algo </prompt>
                 <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
             </filled>
         </field>
@@ -127,22 +136,39 @@
             <grammar src="grammars/asignaturas.jsgf"/>
             <prompt>Indique el nombre de la asignatura</prompt>
 
-<!--                        <help>
+            <help>
                 <throw event="info_asignaturas_es"/>
             </help>
             
             <noinput>
                 <throw event="info_asignaturas_es"/>
             </noinput>
--->                    <filled>
-                <prompt> Va a enviar algo </prompt>
+
+            <filled>
+                <assign name="asignatura" expr="asig"/>
                 <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
             </filled>
         </field>
     </form>
 
     <form id="f_curso">
-        <goto next="asignatura.vxml"/>
+        <field name="numeroCurso">
+            <grammar src="grammars/numeroCursos.jsgf"/>
+            <prompt>Indique el curso que desea consultar.</prompt>
+
+            <help>
+                <throw event="info_cursos_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="info_cursos_es"/>
+            </noinput>
+
+            <filled>
+                <assign name="curso" expr="numeroCurso"/>
+                <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado curso" fetchtimeout="100s" />
+            </filled>
+        </field>
     </form>
 
     <form id="grados_error">
