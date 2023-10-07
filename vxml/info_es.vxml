@@ -199,6 +199,63 @@
             <filled>
                 <!-- A lo mejor esto da error por como la he hecho miradla por si acaso, devuelve 1,2,3 con el numero en letra reconocido o si no lo q tenia el field-->
                 <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
+                 <if cond="grupo=='-1'">
+                    <prompt>  No hemos podido escuchar correctamente su audio. </prompt>
+                    <goto next="#f_reiniciar"/>
+                <elseif cond="grupo=='30'" />
+                    <assign name="grupo" expr="'A'"/>
+                <elseif cond="grupo=='31'" />
+                    <assign name="grupo" expr="'B'"/>
+                <elseif cond="grupo=='32'" />
+                    <assign name="grupo" expr="'C'"/>
+                <elseif cond="grupo=='33'" />
+                    <assign name="grupo" expr="'D'"/>
+                <elseif cond="grupo=='34'" />
+                    <assign name="grupo" expr="'E'"/>
+                <elseif cond="grupo=='35'" />
+                    <assign name="grupo" expr="'F'"/>
+                <elseif cond="grupo=='36'" />
+                    <assign name="grupo" expr="'G'"/>
+                <elseif cond="grupo=='37'" />
+                    <assign name="grupo" expr="'H'"/>
+                <elseif cond="grupo=='38'" />
+                    <assign name="grupo" expr="'I'"/>
+                <elseif cond="grupo=='39'" />
+                    <assign name="grupo" expr="'J'"/>
+                <elseif cond="grupo=='40'" />
+                    <assign name="grupo" expr="'K'"/>
+                <elseif cond="grupo=='41'" />
+                    <assign name="grupo" expr="'L'"/>
+                <elseif cond="grupo=='42'" />
+                    <assign name="grupo" expr="'M'"/>
+                <elseif cond="grupo=='43'" />
+                    <assign name="grupo" expr="'M'"/>
+                <elseif cond="grupo=='44'" />
+                    <assign name="grupo" expr="'N'"/>
+                <elseif cond="grupo=='45'" />
+                    <assign name="grupo" expr="'O'"/>
+                <elseif cond="grupo=='46'" />
+                    <assign name="grupo" expr="'P'"/>
+                <elseif cond="grupo=='47'" />
+                    <assign name="grupo" expr="'Q'"/>
+                <elseif cond="grupo=='48'" />
+                    <assign name="grupo" expr="'R'"/>
+                <elseif cond="grupo=='49'" />
+                    <assign name="grupo" expr="'S'"/>
+                <elseif cond="grupo=='50'" />
+                    <assign name="grupo" expr="'T'"/>
+                <elseif cond="grupo=='51'" />
+                    <assign name="grupo" expr="'U'"/>
+                <elseif cond="grupo=='52'" />
+                    <assign name="grupo" expr="'V'"/>
+                <elseif cond="grupo=='53'" />
+                    <assign name="grupo" expr="'W'"/>
+                <elseif cond="grupo=='54'" />
+                    <assign name="grupo" expr="'X'"/>
+                <elseif cond="grupo=='55'" />
+                    <assign name="grupo" expr="'Y'"/>
+                <elseif cond="grupo=='56'" />
+                    <assign name="grupo" expr="'Z'"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
             </filled>
         </field>
