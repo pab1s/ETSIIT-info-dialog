@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">
+<vxml version="2.1" xml:lang="es-ES" application="eventos.vxml">
 
-<!-- SI LOS EVENTOS NO FUNCIONAN PONER DESPUES DE XMLNS application eventos.xml-->
     <link event="help">
         <grammar src="grammars/ayuda.jsgf"/>
     </link>
@@ -21,7 +20,6 @@
         <block>
             <prompt>
                 Por favor, digame de que desea obtener informacion.
-                <!--break time="2000ms" /-->
             </prompt>
         </block>
 
@@ -59,31 +57,22 @@
                 Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA, PROFESOR o HORARIO.
             </prompt>
 
-<!--    LOS HELP Y NOINPUt NO SABEMOS SI FUNCIONAN PERO NO DEBERIAN IR MAL (hay varios en el documento) -->
-<!--             <help>
+            <help>
                 <throw event="opcion_es"/>
             </help>
 
             <noinput>
                 <throw event="opcion_es"/>
-            </noinput>-->
+            </noinput>
 
             <filled>
-                <if cond="opcion=='profesor'">
+                <if cond="opcion=='profesor' || opcion='profesores'">
                     <goto next="#f_profesores"/>
-                <elseif cond="opcion=='asignatura'" />
+                <elseif cond="opcion=='asignatura' || opcion=='asignaturas'" />
                     <goto next="#f_asignaturas"/>
-                <elseif cond="opcion=='curso'" />
+                <elseif cond="opcion=='curso' || opcion=='cursos'" />
                     <goto next="#f_cursos"/>
-                <elseif cond="opcion=='profesores'" />
-                    <goto next="#f_profesores"/>
-                <elseif cond="opcion=='cursos'" />
-                    <goto next="#f_cursos"/>
-                <elseif cond="opcion=='asignaturas'" />
-                    <goto next="#f_asignaturas"/>
-                <elseif cond="opcion=='horario'" />
-                    <goto next="#f_horarios"/>
-                <elseif cond="opcion=='horarios'" />
+                <elseif cond="opcion=='horario' || opcion=='horarios'" />
                     <goto next="#f_horarios"/>
                 </if>
                 <!-- Reiniciamos el formulario despues de hacer una connsulta -->
@@ -122,14 +111,14 @@
             <grammar src="grammars/profesores.jsgf"/>
             <prompt>Indique el nombre del profesor</prompt>
 
-<!--            <help>
+            <help>
                 <throw event="info_profesores_es"/>
             </help>
             
             <noinput>
                 <throw event="info_profesores_es"/>
             </noinput>
-        -->               
+                    
             <filled>
                 <assign name="profesor" expr="prof"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
@@ -142,14 +131,14 @@
             <grammar src="grammars/asignaturas.jsgf"/>
             <prompt>Indique el nombre de la asignatura</prompt>
 
-<!--            <help>
+            <help>
                 <throw event="info_asignaturas_es"/>
             </help>
             
             <noinput>
                 <throw event="info_asignaturas_es"/>
             </noinput>
-        -->
+
             <filled>
                 <assign name="asignatura" expr="asig"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
@@ -157,19 +146,19 @@
         </field>
     </form>
 
-    <form id="f_curso">
+    <form id="f_cursos">
         <field name="numeroCurso">
             <grammar src="grammars/numeroCursos.jsgf"/>
             <prompt>Indique el curso que desea consultar.</prompt>
 
-<!--            <help>
+            <help>
                 <throw event="info_cursos_es"/>
             </help>
             
             <noinput>
                 <throw event="info_cursos_es"/>
             </noinput>
-        -->
+
             <filled>
                 <assign name="curso" expr="numeroCurso"/>
                 <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado curso" fetchtimeout="100s" />
@@ -182,14 +171,14 @@
             <grammar src="grammars/asignaturas.jsgf"/>
             <prompt>Indique el nombre de la asignatura sobre la que desea consultar el horario.</prompt>
 
-<!--            <help>
+            <help>
                 <throw event="info_asignaturas_es"/>
             </help>
             
             <noinput>
                 <throw event="info_asignaturas_es"/>
             </noinput>
-        -->
+
             <filled>
                 <assign name="asignatura" expr="asig2"/>
             </filled>
@@ -199,14 +188,14 @@
             <grammar src="grammars/grupos.jsgf"/>
             <prompt>Indique el grupo de <value expr="asignatura"/> del que desea consultar el horario.</prompt>
 
- <!--           <help>
+            <help>
                 <throw event="info_grupos_es"/>
             </help>
             
             <noinput>
                 <throw event="info_grupos_es"/>
             </noinput>
-        -->
+
             <filled>
                 <!-- A lo mejor esto da error por como la he hecho miradla por si acaso, devuelve 1,2,3 con el numero en letra reconocido o si no lo q tenia el field-->
                 <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
@@ -220,7 +209,7 @@
             <prompt>Lo siento, no hemos entendido el nombre del grado que queria, asegurese que sea uno de los 4 que se imparten en la ETSIIT. Por favor, vuelva a realizar la llamada</prompt>
             <noinput>
                 <exit/>
-			</noinput>
+            </noinput>
         </field>
     </form>  
 
