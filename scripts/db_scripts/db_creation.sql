@@ -1,7 +1,7 @@
-CREATE TABLE ugr_courses (
+CREATE TABLE etsiit_courses (
     indice INT AUTO_INCREMENT PRIMARY KEY,
-    titulacion VARCHAR(50),
-    asignatura VARCHAR(50),
+    titulacion VARCHAR(100),
+    asignatura VARCHAR(100),
     especialidad VARCHAR(50),
     curso VARCHAR(50),
     semestre VARCHAR(50),
