@@ -1,8 +1,8 @@
 #JSGF V1.0;
 
-grammar titulaciones;
+grammar titulaciones_esREGEX;
 
-public <titulaciones> = <informatica> | <telecomunicaciones> | <dgiim> | <dgiiade>;
+public <titulaciones_esREGEX> = <informatica> | <telecomunicaciones> | <dgiim> | <dgiiade>;
 
 <informatica> = [ingenieria] informatica;
 <telecomunicaciones> = [ingenieria de tecnologia[s] de] teleco[municacion[es]];

@@ -14,6 +14,7 @@
     <var name="profesor" expr="'Pablo Mesejo Santiago'" />
     <var name="asignatura" expr="'Fundamentos de la Progrmacion'" />
     <var name="curso" expr="'Primer Curso'" />
+    <var name="grupo" expr="'A'" />
 
     <form id="seleccionar_opcion">
         <block>
@@ -54,7 +55,7 @@
         <field name="opcion">
             <grammar src="grammars/option_es.jsgf"/>
             <prompt>
-                Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA o PROFESOR.
+                Le podemos ofrecer informacion acerca de algun CURSO, ASIGNATURA, PROFESOR o HORARIO.
             </prompt>
 
 <!--    LOS HELP Y NOINPUt NO SABEMOS SI FUNCIONAN PERO NO DEBERIAN IR MAL (hay varios en el documento) -->
@@ -79,6 +80,10 @@
                     <goto next="#f_cursos"/>
                 <elseif cond="opcion=='asignaturas'" />
                     <goto next="#f_asignaturas"/>
+                <elseif cond="opcion=='horario'" />
+                    <goto next="#f_horarios"/>
+                <elseif cond="opcion=='horarios'" />
+                    <goto next="#f_horarios"/>
                 </if>
                 <!-- Reiniciamos el formulario despues de hacer una connsulta -->
                 <goto next="#f_reiniciar"/>
@@ -167,6 +172,42 @@
             <filled>
                 <assign name="curso" expr="numeroCurso"/>
                 <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado curso" fetchtimeout="100s" />
+            </filled>
+        </field>
+    </form>
+
+    <form id="f_horarios">
+        <field name="asig2">
+            <grammar src="grammars/asignaturas.jsgf"/>
+            <prompt>Indique el nombre de la asignatura sobre la que desea consultar el horario.</prompt>
+
+            <help>
+                <throw event="info_asignaturas_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="info_asignaturas_es"/>
+            </noinput>
+
+            <filled>
+                <assign name="asignatura" expr="asig2"/>
+            </filled>
+        </field>
+
+        <field name="grupoaelegir">
+            <grammar src="grammars/grupos.jsgf"/>
+            <prompt>Indique el grupo de <value expr="asignatura"/> del que desea consultar el horario.</prompt>
+
+            <help>
+                <throw event="info_grupos_es"/>
+            </help>
+            
+            <noinput>
+                <throw event="info_grupos_es"/>
+            </noinput>
+
+            <filled>
+                <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
             </filled>
         </field>
     </form>

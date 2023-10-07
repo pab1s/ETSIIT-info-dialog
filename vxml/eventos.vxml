@@ -16,6 +16,11 @@
         <reprompt/>
     </catch>
 
+    <catch event="info_grupos_es">
+        <prompt>Normalmente los grupos suelen ser de una vocal, A, B, C o de un numero UNO, DOS, TRES..</prompt>
+        <reprompt/>
+    </catch>
+
     <catch event="opcion_es">
         <prompt>Simplemente diga curso asignatura o profesor</prompt>
         <reprompt/>
