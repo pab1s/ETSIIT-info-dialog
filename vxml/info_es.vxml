@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">
+<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml" application="eventos.xml">
 
 <!-- SI LOS EVENTOS NO FUNCIONAN PONER DESPUES DE XMLNS application eventos.xml-->
     <link event="help">
@@ -208,6 +208,7 @@
             </noinput>
 
             <filled>
+                <!-- A lo mejor esto da error por como la he hecho miradla por si acaso, devuelve 1,2,3 con el numero en letra reconocido o si no lo q tenia el field-->
                 <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
                 <submit next="https://etsiit.000webhostapp.com/server_template.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
             </filled>
