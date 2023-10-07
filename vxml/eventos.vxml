@@ -2,7 +2,7 @@
 <vxml version="2.1" xml:lang="es-ES">
 
     <catch event="info_cursos_es">
-        <prompt>El curso tiene que ser de de alguno de los grados de la ETSIIT, un ejemplo es Fundamentos de la Programacion.</prompt>
+        <prompt>El curso tiene que ser alguno de los impartidos en cualquiera de los grados de la ETSIIT, un ejemplo es Fundamentos de la Programacion.</prompt>
         <reprompt/>
     </catch>
 
