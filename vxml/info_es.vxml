@@ -30,7 +30,6 @@
     <!-- Scripts -->
     <script src="scripts/checkGrado.js"/>
     <script src="scripts/castingGrupo.js"/>
-    <script src="scripts/mapGrupo.js"/>
 
     <link event="help">
         <grammar src="grammars/ayuda.jsgf"/>
