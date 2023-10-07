@@ -9,7 +9,7 @@ with open('ugr_data.csv', 'r', newline='', encoding='utf-8') as csvfile:
     for row in reader:
         asignatura = row['asignatura']
         # Aplicar unidecode para eliminar tildes y caracteres especiales
-        asignatura_sin_tilde = unidecode(asignatura)
+        asignatura_sin_tildes = unidecode(asignatura)
         # Agregar el profesor al conjunto
         asignaturas_set.add(asignatura_sin_tildes.strip())  # Eliminar espacios en blanco al principio y al final del nombre
 
