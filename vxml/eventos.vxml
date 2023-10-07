@@ -2,7 +2,7 @@
 <vxml version="2.1" xml:lang="es-ES">
 
     <catch event="info_cursos_es">
-        <prompt>El curso tiene que ser alguno de los impartidos en cualquiera de los grados de la ETSIIT, un ejemplo es Fundamentos de la Programacion.</prompt>
+        <prompt>El curso tiene que ser alguno de los impartidos en cualquiera de los grados de la ETSIIT. Por ejemplo, diga Fundamentos de la Programacion.</prompt>
         <reprompt/>
     </catch>
 
@@ -17,12 +17,12 @@
     </catch>
 
     <catch event="info_grupos_es">
-        <prompt>Normalmente los grupos suelen ser de una vocal, A, B, C o de un numero UNO, DOS, TRES..</prompt>
+        <prompt>Los grupos pueden ser un numero o una letra. Pruebe a decir GRUPO, y el grupo.</prompt>
         <reprompt/>
     </catch>
 
     <catch event="opcion_es">
-        <prompt>Simplemente diga curso asignatura o profesor</prompt>
+        <prompt>Simplemente diga curso asignatura, profesor u horario.</prompt>
         <reprompt/>
     </catch>
 </vxml>
