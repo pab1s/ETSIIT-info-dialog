@@ -2,7 +2,7 @@
 
 grammar grupos;
 
-public <grupos> =  grupo <letras> | <numeros>
+public <grupos> =  grupo <letras> | <numeros>;
 
 <letras> = a | be | ce | de | e | efe | ge | ache | i | jota | ka | ele | eme | ene | o | pe | cu | erre | ese | te | u | uve | uve doble | equis | i griega | zeta;
 <numeros> = uno | dos | tres | cuatro | cinco | seis | siete | ocho | nueve | diez | once | doce | trece | catorce | quince | dieciseis | diecisiete | dieciocho | diecinueve | veinte | veintiuno | veintidos | veintitres | veinticuatro | veinticinco | veintiseis | veintisiete | veintiocho | veintinueve | treinta;
