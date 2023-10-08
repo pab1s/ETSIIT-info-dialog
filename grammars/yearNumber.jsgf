@@ -1,0 +1,5 @@
+#JSGF V1.0;
+
+grammar numeroCursos;
+
+public <numeroCursos> = First academic year | Second academic year | Third academic year | Fourth academic year | Fifth academic year;
