@@ -1,0 +1,5 @@
+#JSGF V1.0;
+
+grammar option_en;
+
+public <option_en> = course | subject | professor | courses | subjects | professors | schedule;
