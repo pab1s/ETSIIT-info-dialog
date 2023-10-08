@@ -21,7 +21,7 @@ This VoiceXML application allows users to obtain information about the faculty, 
 4. **Results**: The application will provide information based on your input.
 
 ## Code Structure
-The main code file, `index_[lang].vxml`, defines the entire VoiceXML application. It includes the following components:
+The main code file, `info_[lang].vxml`, defines the entire VoiceXML application. It includes the following components:
 
 * Constants: Definitions of degree program names.
 * Variables: Variables used to store user input and other data.
