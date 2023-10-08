@@ -36,8 +36,8 @@
         <reprompt/>
     </catch>
 
-    <catch event="info_courses_en">
-        <prompt>You need to specify the academic year. Try saying First year, Second year, Third year, Fourth year, or Fifth year.</prompt>
+    <catch event="info_years_en">
+        <prompt>You need to specify the academic year. Try saying First academic year, Second academic year, Third academic year, Fourth academic year, or Fifth academic year.</prompt>
         <reprompt/>
     </catch>
 
@@ -47,7 +47,7 @@
     </catch>
 
     <catch event="option_en">
-        <prompt>Simply say course, subject, professor, or schedule.</prompt>
+        <prompt>Simply say year, subject, professor, or schedule.</prompt>
         <reprompt/>
     </catch>
 
