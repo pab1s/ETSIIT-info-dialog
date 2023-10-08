@@ -2,4 +2,4 @@
 
 grammar option_en;
 
-public <option_en> = course | subject | professor | courses | subjects | professors | schedule;
+public <option_en> = year | subject | professor | years | subjects | professors | schedule;
