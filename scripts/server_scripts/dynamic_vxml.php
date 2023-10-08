@@ -20,6 +20,7 @@ $response = "";
 
 // Connected to the database
 $connected = true;
+$goodbye = "Gracias por usar el servicio. Adios.";
 
 try {
     $conn = new PDO("mysql:host=$serverName;dbname=$database", $username, $password);
@@ -116,7 +117,7 @@ echo '<vxml version="2.1" xml:lang="es-ES" xmlns="http://www.w3.org/2001/vxml">'
 echo '<form>';
 echo '<block>';
 echo "<prompt>$response</prompt>";
-echo "<goto next=\"#f_reiniciar\"/>";
+echo "<prompt>$goodbye</prompt>";
 echo '</block>';
 echo '</form>';
 echo '</vxml>';

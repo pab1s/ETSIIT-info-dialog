@@ -17,6 +17,7 @@ $password = "Akie4puyXm";
 
 // Initialize the response
 $response = "";
+$goodbye = "Thank you for using the service. Goodbye.";
 
 // Connected to the database
 $connected = true;
@@ -116,6 +117,7 @@ echo '<vxml version="2.1" xml:lang="en-EN" xmlns="http://www.w3.org/2001/vxml">'
 echo '<form>';
 echo '<block>';
 echo "<prompt>$response</prompt>";
+echo "<prompt>$goodbye</prompt>";
 echo '</block>';
 echo '</form>';
 echo '</vxml>';
