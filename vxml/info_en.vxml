@@ -17,7 +17,7 @@
 
     <!-- Prompts -->
     <var name="PROMPT_TITULACION" expr="'Start by telling us the name of the degree you want information about.' "/>
-    <var name="PROMPT_OPCION" expr="'We can provide information about a COURSE, SUBJECT, PROFESSOR, or SCHEDULE.' "/>
+    <var name="PROMPT_OPCION" expr="'We can provide information about a YEAR, SUBJECT, PROFESSOR, or SCHEDULE.' "/>
     <var name="PROMPT_DESEAR" expr="'Is there anything else you would like to do?' "/>
     <var name="PROMPT_PROFESOR" expr="'Please provide the name of the professor.' "/>
     <var name="PROMPT_ASIGNATURA" expr="'Please provide the name of the subject.' "/>
@@ -29,8 +29,8 @@
 
 
     <!-- Scripts -->
-    <script src="scripts/checkGrado.js"/>
-    <script src="scripts/castingGrupo.js"/>
+    <script src="scripts/checkDegree.js"/>
+    <script src="scripts/castingGroup.js"/>
 
     <link event="help">
         <grammar src="grammars/help.jsgf"/>
@@ -63,7 +63,7 @@
                 <elseif cond="numeroTitulo=='4'"/>
                     <assign name="grado" expr="GRADO_INFORMATICA_ADE"/>
                 <else/>
-                    <prompt> You have selected a non-valid degree. </prompt>
+                    <prompt> You have selected a non valid degree. </prompt>
                     <goto next="#grados_error"/>
                 </if>
                 <prompt> You have selected <value expr="grado"/>. </prompt>
@@ -71,30 +71,30 @@
         </field>
         
         <field name="opcion">
-            <grammar src="grammars/option_es.jsgf"/>
+            <grammar src="grammars/option_en.jsgf"/>
             <prompt>
                 <value expr="PROMPT_OPCION"/>
             </prompt>
 
             <help>
-                <throw event="opcion_es"/>
+                <throw event="option_en"/>
             </help>
 
             <noinput>
-                <throw event="opcion_es"/>
+                <throw event="option_en"/>
             </noinput>
 
             <filled>
-                <if cond="opcion=='profesor' || opcion=='profesores'">
+                <if cond="opcion=='professor' || opcion=='professors'">
                     <goto next="#f_profesores"/>
-                <elseif cond="opcion=='asignatura' || opcion=='asignaturas'" />
+                <elseif cond="opcion=='subject' || opcion=='subjects'" />
                     <goto next="#f_asignaturas"/>
-                <elseif cond="opcion=='curso' || opcion=='cursos'" />
+                <elseif cond="opcion=='year' || opcion=='years'" />
                     <goto next="#f_cursos"/>
-                <elseif cond="opcion=='horario' || opcion=='horarios'" />
+                <elseif cond="opcion=='schedule'" />
                     <goto next="#f_horarios"/>
                 <else/>
-                    <prompt> Opción no válida. </prompt>
+                    <prompt> Non valid option. </prompt>
                     <goto next="#f_reiniciar"/>
                 </if>
                 <!-- Reiniciamos el formulario después de hacer una consulta -->
@@ -107,11 +107,11 @@
         <field name="prof">
             <grammar src="grammars/profesores.jsgf"/>
             <prompt><value expr="PROMPT_PROFESOR"/></prompt>
-            <help><throw event="info_profesores_es"/></help>
-            <noinput><throw event="info_profesores_es"/></noinput>
+            <help><throw event="info_professors_en"/></help>
+            <noinput><throw event="info_professors_en"/></noinput>
             <filled>
                 <assign name="profesor" expr="prof"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
+                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -119,13 +119,13 @@
 
     <form id="f_asignaturas">
         <field name="asig">
-            <grammar src="grammars/asignaturas.jsgf"/>
+            <grammar src="grammars/subjects.jsgf"/>
             <prompt><value expr="PROMPT_ASIGNATURA"/></prompt>
-            <help><throw event="info_asignaturas_es"/></help>
-            <noinput><throw event="info_asignaturas_es"/></noinput>
+            <help><throw event="info_subjects_en"/></help>
+            <noinput><throw event="info_subjects_en"/></noinput>
             <filled>
                 <assign name="asignatura" expr="asig"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
+                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -133,13 +133,13 @@
 
     <form id="f_cursos">
         <field name="numeroCurso">
-            <grammar src="grammars/numeroCursos.jsgf"/>
+            <grammar src="grammars/yearNumber.jsgf"/>
             <prompt><value expr="PROMPT_CURSO"/></prompt>
-            <help><throw event="info_cursos_es"/></help>
-            <noinput><throw event="info_cursos_es"/></noinput>
+            <help><throw event="info_years_en"/></help>
+            <noinput><throw event="info_years_en"/></noinput>
             <filled>
                 <assign name="curso" expr="numeroCurso"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado curso" fetchtimeout="100s" />
+                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado curso" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -147,23 +147,23 @@
 
     <form id="f_horarios">
         <field name="asig2">
-            <grammar src="grammars/asignaturas.jsgf"/>
+            <grammar src="grammars/subjects.jsgf"/>
             <prompt><value expr="PROMPT_ASIGNATURA_HORARIO"/></prompt>
-            <help><throw event="info_asignaturas_es"/></help>
-            <noinput><throw event="info_asignaturas_es"/></noinput>
+            <help><throw event="info_subjects_en"/></help>
+            <noinput><throw event="info_subjects_en"/></noinput>
             <filled>
                 <assign name="asignatura" expr="asig2"/>
             </filled>
         </field>
 
         <field name="grupoaelegir">
-            <grammar src="grammars/grupos.jsgf"/>
+            <grammar src="grammars/groups.jsgf"/>
             <prompt><value expr="PROMPT_GRUPO_HORARIO_1 + asignatura + PROMPT_GRUPO_HORARIO_2"/></prompt>
-            <help><throw event="info_grupos_es"/></help>
-            <noinput><throw event="info_grupos_es"/></noinput>
+            <help><throw event="info_groups_en"/></help>
+            <noinput><throw event="info_groups_en"/></noinput>
             <filled>
-                <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
+                <assign name="grupo" expr="castingGroup(grupoaelegir)"/>
+                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
