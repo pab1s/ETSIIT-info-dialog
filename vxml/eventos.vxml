@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xml:lang="es-ES">
 
-    <catch event="info_cursos_es">
-        <prompt>El curso tiene que ser alguno de los impartidos en cualquiera de los grados de la ETSIIT. Por ejemplo, diga Fundamentos de la Programacion.</prompt>
+    <catch event="info_asignaturas_es">
+        <prompt>La asignatura tiene que ser alguno de los impartidos en cualquiera de los grados de la ETSIIT. Por ejemplo, diga Fundamentos de la Programacion.</prompt>
         <reprompt/>
     </catch>
 
@@ -22,7 +22,33 @@
     </catch>
 
     <catch event="opcion_es">
-        <prompt>Simplemente diga curso asignatura, profesor u horario.</prompt>
+        <prompt>Simplemente diga curso, asignatura, profesor u horario.</prompt>
         <reprompt/>
     </catch>
+
+    <catch event="info_subjects_en">
+        <prompt>The subject must be one of those offered in any of the ETSIIT degree programs. For example, say Fundamentals of  Programming.</prompt>
+        <reprompt/>
+    </catch>
+
+    <catch event="info_professors_en">
+        <prompt>You need to provide the full name, including both first name and last name, of a professor at ETSIIT.</prompt>
+        <reprompt/>
+    </catch>
+
+    <catch event="info_courses_en">
+        <prompt>You need to specify the academic year. Try saying First year, Second year, Third year, Fourth year, or Fifth year.</prompt>
+        <reprompt/>
+    </catch>
+
+    <catch event="info_groups_en">
+        <prompt>Groups can be a number or a letter. Try saying GROUP, followed by the group identifier.</prompt>
+        <reprompt/>
+    </catch>
+
+    <catch event="option_en">
+        <prompt>Simply say course, subject, professor, or schedule.</prompt>
+        <reprompt/>
+    </catch>
+
 </vxml>
