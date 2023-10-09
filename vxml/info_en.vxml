@@ -69,6 +69,19 @@
                 <prompt> You have selected <value expr="grado"/>. </prompt>
             </filled>
         </field>
+
+        <field name="confirm">
+            <grammar src="grammars/confirmation.jsgf"/>
+            <prompt> Is this information correct? </prompt>
+            <filled>
+                <if cond="confirm=='no'">
+                    <prompt>OK. Lets try again. </prompt>
+                    <goto next="#seleccionar_opcion"/>
+                <else/>
+                    <prompt>OK. </prompt>
+                </if>
+            </filled>
+        </field>
         
         <field name="opcion">
             <grammar src="grammars/option_en.jsgf"/>
