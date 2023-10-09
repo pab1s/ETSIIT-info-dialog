@@ -1,3 +1,8 @@
+/**
+ * Coverts the given string of the given group in a formatted one.
+ * @param {string} grupoaelegir - The group to check.
+ * @returns {boolean} - True if the group matches any of the predefined groups, false otherwise.
+ */
 function castingGrupo(grupoaelegir) {
   var numerosEnLetras = ['cero', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciseis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'veintiuno', 'veintidos', 'veintitres', 'veinticuatro', 'veinticinco', 'veintiseis', 'veintisiete', 'veintiocho', 'veintinueve'];
   var grupos = ['grupo a', 'grupo be', 'grupo ce', 'grupo de', 'grupo e', 'grupo efe', 'grupo ge', 'grupo ache', 'grupo i', 'grupo jota', 'grupo ka', 'grupo ele', 'grupo eme', 'grupo ene', 'grupo o', 'grupo pe', 'grupo cu', 'grupo erre', 'grupo ese', 'grupo te', 'grupo u', 'grupo uve', 'grupo uve doble', 'grupo equis', 'grupo i griega', 'grupo zeta'];

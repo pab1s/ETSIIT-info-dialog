@@ -1,3 +1,17 @@
+"""
+This script scrapes data from the website https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica
+and extracts information about the courses, professors, and schedules for the Computer Engineering degree at the University of Granada.
+
+The script uses the requests and BeautifulSoup libraries to make HTTP requests and parse HTML content.
+
+The script prints the following information for each course:
+- Course number
+- Semester
+- Course name
+- Professors and their corresponding groups
+- Schedule information (if available)
+
+"""
 import requests
 from bs4 import BeautifulSoup
 

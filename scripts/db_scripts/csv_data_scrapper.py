@@ -1,3 +1,10 @@
+"""
+This script scrapes data from the University of Granada's website for undergraduate degree programs in either Spanish or English. It retrieves information about courses, professors, schedules, and more, and stores it in a CSV file. The script uses the requests, BeautifulSoup, csv, and unidecode libraries to accomplish this.
+
+The script starts by defining the base URL and degree programs for the selected language. It then defines the CSV header and creates an index. The script iterates through the degree programs, makes a GET request to each program's page, and parses the HTML content. It then extracts the program name, course sections, and course information, including course name, specialty, professor, schedule, and more. Finally, it stores the data in a CSV file.
+
+The script takes one argument, the language, which can be either 'es' for Spanish or 'en' for English. If an invalid language is provided, the script raises a ValueError.
+"""
 import requests
 from bs4 import BeautifulSoup
 import csv

@@ -1,3 +1,7 @@
+/**
+ * Returns a greeting based on the current time of day.
+ * @returns {string} The appropriate greeting for the current time of day.
+ */
 function saludo(){
     var date = new Date();
     var time = date.getHours();

@@ -1,6 +1,12 @@
 const fs = require('fs');
 const csvParser = require('csv-parser');
 
+/**
+ * Returns a promise that resolves to a string containing the names of the professors associated with the specified subject and degree.
+ * @param {string} asignatura - The name of the subject to search for.
+ * @param {string} titulacion - The name of the degree to search for.
+ * @returns {Promise<string>} A promise that resolves to a string containing the names of the professors associated with the specified subject and degree.
+ */
 async function checkProfesores(asignatura, titulacion) {
     return new Promise((resolve, reject) => {
         let profesoresAsociados = new Set();

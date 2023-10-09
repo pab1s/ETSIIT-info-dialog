@@ -1,3 +1,18 @@
+/**
+ * 
+ * OLD FILE
+ * This script handles a VoiceXML POST request and returns a response based on the input parameters in spanish.
+ * It connects to a MySQL database and executes queries to retrieve information about courses, professors, and groups.
+ * The response is formatted in VoiceXML and includes information about the requested course, professor, and groups.
+ * 
+ * @param string $grado The degree program (e.g. "Computer Science") requested by the user
+ * @param string $asignatura The course name (e.g. "Database Systems") requested by the user
+ * @param string $curso The course level (e.g. "Undergraduate") requested by the user
+ * @param string $profesor The professor name (e.g. "John Smith") requested by the user
+ * @param string $grupo The group type (e.g. "Theory" or "Laboratory") requested by the user
+ * 
+ * @return string The VoiceXML response containing information about the requested course, professor, and groups
+ */
 <?php
 // Set the content type to VoiceXML
 header('Content-type: application/voicexml+xml');

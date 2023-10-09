@@ -1,3 +1,8 @@
+"""
+This script scrapes data from the website https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica
+and extracts information about the courses, subjects, professors and schedules of the Computer Engineering degree
+at the University of Granada. The extracted data is stored in a JSON file.
+"""
 import requests
 from bs4 import BeautifulSoup
 import json

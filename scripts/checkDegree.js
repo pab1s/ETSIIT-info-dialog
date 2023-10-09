@@ -1,3 +1,13 @@
+/**
+ * Checks if a given degree matches a list of predefined degrees.
+ * @param {string} degree - The degree to check.
+ * @returns {number} - A number representing the type of degree:
+ * 0 - Unknown degree
+ * 1 - Informatics degree
+ * 2 - Telecommunications degree
+ * 3 - Maths degree
+ * 4 - Business degree
+ */
 function checkDegree(degree) {
   var informatics = [
     'informatics',

@@ -1,3 +1,8 @@
+/**
+ * Recognizes the degree based on the given text using regular expressions.
+ * @param {string} texto - The text to recognize the degree from.
+ * @returns {string} - The recognized degree ("dgiim", "dgiiade", "informatica", "teleco", or "error").
+ */
 function reconocerTitulacion(texto) {
     // Expresiones regulares para reconocer las titulaciones
     const regexInformatica = /(ingenieria)? informatica/;
