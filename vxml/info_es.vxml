@@ -106,7 +106,7 @@
                 <elseif cond="opcion=='horario' || opcion=='horarios'" />
                     <goto next="#f_horarios"/>
                 <else/>
-                    <prompt> Opción no válida. </prompt>
+                    <prompt> Opcion no valida. </prompt>
                     <goto next="#f_reiniciar"/>
                 </if>
                 <!-- Reiniciamos el formulario después de hacer una consulta -->
@@ -125,7 +125,7 @@
                     <break time="1s"/>
                     <goto next="#seleccionar_opcion"/>
                 <else/>
-                    <prompt>Muchas gracias por haber utilizar el servicio, esperamos que haya sido de su agrado.</prompt>
+                    <prompt>Muchas gracias por haber utilizado el servicio, esperamos que haya sido de su agrado.</prompt>
                     <noinput>
                         <exit/>
                     </noinput>
