@@ -1,5 +1,0 @@
-#JSGF V1.0;
-
-grammar triaIdioma;
-
-public <triaIdioma> = catala | catalan | valencia | valenciano;
