@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="en-US" application="eventos.vxml">
+<vxml version="2.1" xml:lang="en-GB" application="eventos.vxml">
 
     <!-- Constants -->
     <var name="GRADO_INFORMATICA" expr="'BachelorS Degree in Computer Engineering'" />
