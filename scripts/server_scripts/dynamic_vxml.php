@@ -10,23 +10,22 @@ $profesor = isset($_POST['profesor']) ? $_POST['profesor'] : '';
 $grupo = isset($_POST['grupo']) ? $_POST['grupo'] : '';
 
 // Database connection details
-$serverName = "sql11.freesqldatabase.com";
-$database = "sql11650278";
-$username = "sql11650278";
+$serverName = "localhost";
+$database = "info_etsiit";
+$username = "info_etsiit";
 $password = "Akie4puyXm";
 
 // Initialize the response
 $response = "";
+$goodbye = "Gracias por usar el servicio. Adios.";
 
 // Connected to the database
 $connected = true;
-$goodbye = "Gracias por usar el servicio. Adios.";
 
 try {
     $conn = new PDO("mysql:host=$serverName;dbname=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    // die("Connection failed: " . $e->getMessage());
     $response = "Lo siento, el servidor está sobrecargado en este momento. Inténtalo de nuevo más tarde. Connection failed: " . $e->getMessage();
     $connected = false;
 }
@@ -48,64 +47,141 @@ function executeQuery($conn, $sql, $params) {
 
 // Connected to the database
 if ($connected) {
-        
+
     // Handle different query scenarios based on input parameters
     if (!empty($grado) && !empty($asignatura) && empty($grupo)) {
-        // Titulacion and Asignatura -> Profesores y Grupos
-        $sql = "SELECT DISTINCT profesor, grupo FROM etsiit_courses WHERE titulacion = :grado AND asignatura = :asignatura";
+        // Titulacion and Asignatura -> Profesor y Grupos (Teoría o Prácticas)
+        $sql = "SELECT DISTINCT profesor, grupo, tipo_grupo FROM cursos WHERE titulacion = :grado AND asignatura = :asignatura";
         $params = [':grado' => $grado, ':asignatura' => $asignatura];
         $results = executeQuery($conn, $sql, $params);
 
         if (count($results) > 0) {
-            $response = "Los profesores y grupos para $grado y $asignatura son:";
+            $response = "\nLos profesores de la asignatura <emphasis>$asignatura</emphasis> en el $grado son:\n";
+            $profesorGrupos = [];
+
             foreach ($results as $row) {
-                $response .= " Profesor: " . $row['profesor'] . ", Grupo: " . $row['grupo'];
+                $profesor = $row['profesor'];
+                $grupo = $row['grupo'];
+                $tipoDeGrupo = $row['tipo_grupo'];
+
+                if (!isset($profesorGrupos[$profesor])) {
+                    $profesorGrupos[$profesor] = [];
+                }
+
+                $profesorGrupos[$profesor][] = [
+                    'grupo' => $grupo,
+                    'tipo' => $tipoDeGrupo,
+                ];
+            }
+
+            foreach ($profesorGrupos as $profesor => $grupos) {
+                $response .= "\n<break time=\"400ms\"/><emphasis>$profesor</emphasis>; que imparte en el ";
+
+                $grupoCount = count($grupos);
+                for ($i = 0; $i < $grupoCount; $i++) {
+                    $response .= "grupo " . $grupos[$i]['grupo'] . " de " . $grupos[$i]['tipo'] . "<break time=\"50ms\"/>";
+
+                    if ($i == $grupoCount - 2) {
+                        $response .= " y ";
+                    } 
+                }
             }
         } else {
-            $response = "Lo siento, no se encontraron resultados para $grado y $asignatura.";
+            $response = "Lo siento, no se encontraron resultados para la $asignatura del $grado.";
         }
     } elseif (!empty($grado) && !empty($profesor)) {
         // Titulacion and Profesor -> Asignaturas y Grupos
-        $sql = "SELECT DISTINCT asignatura, grupo FROM etsiit_courses WHERE titulacion = :grado AND profesor = :profesor";
+        $sql = "SELECT DISTINCT asignatura, grupo, tipo_grupo FROM cursos WHERE titulacion = :grado AND profesor = :profesor";
         $params = [':grado' => $grado, ':profesor' => $profesor];
         $results = executeQuery($conn, $sql, $params);
 
         if (count($results) > 0) {
-            $response = "Las asignaturas y grupos para $grado y el profesor $profesor son:";
+            $response = "\nLas asignaturas que imparte el profesor <emphasis>$profesor</emphasis> en el $grado son:\n";
+            $asignaturaGrupos = [];
+
             foreach ($results as $row) {
-                $response .= " Asignatura: " . $row['asignatura'] . ", Grupo: " . $row['grupo'];
+                $asignatura = $row['asignatura'];
+                $grupo = $row['grupo'];
+                $tipoDeGrupo = $row['tipo_grupo'];
+
+                if (!isset($asignaturaGrupos[$asignatura])) {
+                    $asignaturaGrupos[$asignatura] = [];
+                }
+
+                $asignaturaGrupos[$asignatura][] = [
+                    'grupo' => $grupo,
+                    'tipo' => $tipoDeGrupo,
+                ];
+            }
+
+            foreach ($asignaturaGrupos as $asignatura => $grupos) {
+                $response .= "\n<break time=\"400ms\"/><emphasis>$asignatura</emphasis>; en el ";
+
+                $grupoCount = count($grupos);
+                for ($i = 0; $i < $grupoCount; $i++) {
+                    $response .= "grupo " . $grupos[$i]['grupo'] . " de " . $grupos[$i]['tipo'] . "<break time=\"50ms\"/>";
+
+                    if ($i == $grupoCount - 2) {
+                        $response .= " y ";
+                    }
+                }
             }
         } else {
-            $response = "Lo siento, no se encontraron resultados para $grado y el profesor $profesor.";
+            $response = "Lo siento, no se encontraron resultados para el profesor $profesor en el $grado";
         }
     } elseif (!empty($grado) && !empty($asignatura) && !empty($grupo)) {
         // Titulacion, Asignatura, and Grupo -> Horario
-        $sql = "SELECT DISTINCT dia_de_la_semana, TIME_FORMAT(hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(hora_fin, '%H:%i') AS hora_fin FROM etsiit_courses WHERE titulacion = :grado AND asignatura = :asignatura AND grupo = :grupo";
+        $sql = "SELECT DISTINCT dia_de_la_semana, TIME_FORMAT(hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(hora_fin, '%H:%i') AS hora_fin FROM cursos WHERE titulacion = :grado AND asignatura = :asignatura AND grupo = :grupo";
         $params = [':grado' => $grado, ':asignatura' => $asignatura, ':grupo' => $grupo];
         $results = executeQuery($conn, $sql, $params);
 
         if (count($results) > 0) {
-            $response = "El horario para $grado, $asignatura y el grupo $grupo es:";
+            $response = "\nEl horario para el grupo $grupo de la asignatura $asignatura en el $grado es:\n";
             foreach ($results as $row) {
-                $response .= " Dia: " . $row['dia_de_la_semana'] . ", Hora Inicio: " . $row['hora_inicio'] . ", Hora Fin: " . $row['hora_fin'];
+                $response .= $row['dia_de_la_semana'] . " de " . $row['hora_inicio'] . " a " . $row['hora_fin'] . "<break time=\"100ms\"/>";
             }
         } else {
-            $response = "Lo siento, no se encontraron resultados para $grado, $asignatura y el grupo $grupo.";
+            $response = "Lo siento, no se encontraron resultados para el grupo $grupo de la asignatura $asignatura en el $grado";
         }
     } elseif (!empty($grado) && !empty($curso)) {
-        // Titulacion and Curso -> Asignaturas
-        $sql = "SELECT DISTINCT asignatura FROM etsiit_courses WHERE titulacion = :grado AND curso = :curso";
+        // Titulacion and Curso -> Asignaturas por Semestre
+        $sql = "SELECT DISTINCT asignatura, semestre FROM cursos WHERE titulacion = :grado AND curso = :curso";
         $params = [':grado' => $grado, ':curso' => $curso];
         $results = executeQuery($conn, $sql, $params);
 
         if (count($results) > 0) {
-            $response = "Las asignaturas para $grado y el curso $curso son:";
+            $response = "\nLas asignaturas del $grado en el <emphasis>$curso</emphasis> son:\n";
+            $semestres = [];
+
             foreach ($results as $row) {
-                $response .= " " . $row['asignatura'];
+                $asignatura = $row['asignatura'];
+                $semestre = $row['semestre'];
+
+                if (!isset($semestres[$semestre])) {
+                    $semestres[$semestre] = [];
+                }
+
+                $semestres[$semestre][] = [
+                    'asignatura' => $asignatura,
+                ];
             }
-        } else {
-            $response = "Lo siento, no se encontraron asignaturas para $grado y el curso $curso.";
+
+            foreach ($semestres as $semestre => $asignaturas) {
+                $response .= "\n<break time=\"400ms\"/><emphasis>$semestre</emphasis>:\n";
+
+                $asignaturasCount = count($asignaturas);
+                for ($i = 0; $i < $asignaturasCount; $i++) {
+                    $response .= $asignaturas[$i]['asignatura'] . "<break time=\"50ms\"/>";
+
+                if ($i == $asignaturasCount - 2) {
+                        $response .= " y ";
+                    }
+                }
+            }
+        }else {
+            $response = "Lo siento, no se encontraron asignaturas para el $grado en el $curso";
         }
+
     } else {
         $response = "Por favor, proporciona parámetros válidos para la consulta.";
     }
