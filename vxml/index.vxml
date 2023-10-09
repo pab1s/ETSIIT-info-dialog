@@ -4,38 +4,41 @@
   <script src="scripts/saludos.js"/>
 
   <catch event="nomatch noinput" count ="3">
+    Lo sentimos, no hemos podido entenderle. Por favor, vuelva a intentarlo mas tarde.
     <exit/>
   </catch>
 
   <menu>
-    <prompt count="1" bargein="true"> <value expr="saludo()"/>
+    <prompt banrgein="true"> <value expr="saludo()"/>
       Bienvenido a la Escuela Tecnica Superior de Ingenierias Informatica y de
       Telecomunicacion de la Universidad de Granada. Por favor, elija su idioma:
       <break time="500ms"/> <!-- Pausa de 500ms para dar tiempo al usuario -->
     </prompt>
+
     <prompt>
       Para CASTELLANO, pulse 1 o diga CASTELLANO,
       <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
-      Para CATALAN, diga CATALAN o pulse 2
+    </prompt>
+    <prompt xml:lang="en-GB">
       <break time="200ms"/> <!-- Pausa de 200ms para separar las opciones -->
-      Para INGLES, diga INGLES o pulse 3
+      For ENGLISH, press 2 or say ENGLISH.
     </prompt>
 
     <choice dtmf="1" next="info_es.vxml">
       CASTELLANO
     </choice>
-    <choice dtmf="2" next="info_ca.vxml">
-      <grammar src="grammars/lang_ca.jsgf" />
-      CATALAN
-    </choice>
-    <choice dtmf="3" next="info_en.vxml">
+    <choice dtmf="2" next="info_en.vxml">
       <grammar src="grammars/lang_en.jsgf" />
       INGLES
     </choice>
 
     <noinput>
-      No he entendido cual es la opcion deseada. Por favor, repita.
+      Por favor, diga una de las opciones.
       <reprompt />
     </noinput>
+    <nomatch>
+      No he entendido cual es la opcion deseada. Por favor, repita.
+      <reprompt />
+    </nomatch>
   </menu>
 </vxml>
