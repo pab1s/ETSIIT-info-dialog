@@ -212,7 +212,7 @@ echo '<form>';
 echo '<block>';
 echo "<prompt>$response</prompt>";
 echo "<prompt>$goodbye</prompt>";
-echo '<disconnect/>';
+echo '<exit/>';
 echo '</block>';
 echo '</form>';
 echo '</vxml>';
