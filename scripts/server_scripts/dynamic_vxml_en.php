@@ -51,7 +51,7 @@ if ($connected) {
     // Handle different query scenarios based on input parameters
     if (!empty($grado) && !empty($asignatura) && empty($grupo)) {
         // Titulacion and Asignatura -> Profesores y Grupos
-        $sql = "SELECT DISTINCT profesor, grupo, tipo_grupo FROM courses WHERE titulacion = :grado AND asignatura = :asignatura";
+        $sql = "SELECT DISTINCT profesor, grupo FROM courses WHERE titulacion = :grado AND asignatura = :asignatura";
         $params = [':grado' => $grado, ':asignatura' => $asignatura];
         $results = executeQuery($conn, $sql, $params);
 
@@ -62,16 +62,25 @@ if ($connected) {
             foreach ($results as $row) {
                 $profesor = $row['profesor'];
                 $grupo = $row['grupo'];
-                $tipoDeGrupo = $row['tipo_grupo'];
+                $tipoDeGrupo = '';
 
-                if (!isset($profesorGrupos[$profesor])) {
-                    $profesorGrupos[$profesor] = [];
+                 // Verificar si el grupo es un número (Laboratory) o una letra (Theory)
+                if (is_numeric($grupo)) {
+                    $tipoDeGrupo = 'Laboratory group';
+                } elseif (ctype_alpha($grupo)) {
+                    $tipoDeGrupo = 'Theory group';
                 }
 
-                $profesorGrupos[$profesor][] = [
-                    'grupo' => $grupo,
-                    'tipo' => $tipoDeGrupo,
-                ];
+                if (!empty($tipoDeGrupo)) {
+                    if (!isset($profesorGrupos[$profesor])) {
+                        $profesorGrupos[$profesor] = [];
+                    }
+
+                    $profesorGrupos[$profesor][] = [
+                        'grupo' => $grupo,
+                        'tipo' => $tipoDeGrupo,
+                    ];
+                }
             }
 
             foreach ($profesorGrupos as $profesor => $grupos) {
@@ -92,7 +101,7 @@ if ($connected) {
         }
     } elseif (!empty($grado) && !empty($profesor)) {
         // Titulacion and Profesor -> Asignaturas y Grupos
-        $sql = "SELECT DISTINCT asignatura, grupo, tipo_grupo FROM courses WHERE titulacion = :grado AND profesor = :profesor";
+        $sql = "SELECT DISTINCT asignatura, grupo FROM courses WHERE titulacion = :grado AND profesor = :profesor";
         $params = [':grado' => $grado, ':profesor' => $profesor];
         $results = executeQuery($conn, $sql, $params);
 
@@ -103,16 +112,25 @@ if ($connected) {
             foreach ($results as $row) {
                 $asignatura = $row['asignatura'];
                 $grupo = $row['grupo'];
-                $tipoDeGrupo = $row['tipo_grupo'];
+                $tipoDeGrupo = '';
+
+                 // Verificar si el grupo es un número (Laboratory) o una letra (Theory)
+                if (is_numeric($grupo)) {
+                    $tipoDeGrupo = 'Laboratory group';
+                } elseif (ctype_alpha($grupo)) {
+                    $tipoDeGrupo = 'Theory group';
+                }
 
                 if (!isset($asignaturaGrupos[$asignatura])) {
                     $asignaturaGrupos[$asignatura] = [];
                 }
 
-                $asignaturaGrupos[$asignatura][] = [
-                    'grupo' => $grupo,
-                    'tipo' => $tipoDeGrupo,
-                ];
+                if (!empty($tipoDeGrupo)) {
+                    $asignaturaGrupos[$asignatura][] = [
+                        'grupo' => $grupo,
+                        'tipo' => $tipoDeGrupo,
+                    ];
+                }
             }
 
             foreach ($asignaturaGrupos as $asignatura => $grupos) {

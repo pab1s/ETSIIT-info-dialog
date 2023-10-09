@@ -51,7 +51,7 @@ if ($connected) {
     // Handle different query scenarios based on input parameters
     if (!empty($grado) && !empty($asignatura) && empty($grupo)) {
         // Titulacion and Asignatura -> Profesor y Grupos (Teoría o Prácticas)
-        $sql = "SELECT DISTINCT profesor, grupo, tipo_grupo FROM cursos WHERE titulacion = :grado AND asignatura = :asignatura";
+        $sql = "SELECT DISTINCT profesor, grupo FROM cursos WHERE titulacion = :grado AND asignatura = :asignatura";
         $params = [':grado' => $grado, ':asignatura' => $asignatura];
         $results = executeQuery($conn, $sql, $params);
 
@@ -62,16 +62,25 @@ if ($connected) {
             foreach ($results as $row) {
                 $profesor = $row['profesor'];
                 $grupo = $row['grupo'];
-                $tipoDeGrupo = $row['tipo_grupo'];
+                $tipoDeGrupo = '';
 
-                if (!isset($profesorGrupos[$profesor])) {
-                    $profesorGrupos[$profesor] = [];
+                // Verificar si el grupo es un número (Laboratory) o una letra (Theory)
+                if (is_numeric($grupo)) {
+                    $tipoDeGrupo = 'Grupo de practicas';
+                } elseif (ctype_alpha($grupo)) {
+                    $tipoDeGrupo = 'Grupo de teoria';
                 }
 
-                $profesorGrupos[$profesor][] = [
-                    'grupo' => $grupo,
-                    'tipo' => $tipoDeGrupo,
-                ];
+                if (!empty($tipoDeGrupo)) {
+                    if (!isset($profesorGrupos[$profesor])) {
+                        $profesorGrupos[$profesor] = [];
+                    }
+
+                    $profesorGrupos[$profesor][] = [
+                        'grupo' => $grupo,
+                        'tipo' => $tipoDeGrupo,
+                    ];
+                }
             }
 
             foreach ($profesorGrupos as $profesor => $grupos) {
@@ -79,7 +88,7 @@ if ($connected) {
 
                 $grupoCount = count($grupos);
                 for ($i = 0; $i < $grupoCount; $i++) {
-                    $response .= "grupo " . $grupos[$i]['grupo'] . " de " . $grupos[$i]['tipo'] . "<break time=\"50ms\"/>";
+                    $response .= $grupos[$i]['tipo'] . " " . $grupos[$i]['grupo'] . "<break time=\"50ms\"/>";
 
                     if ($i == $grupoCount - 2) {
                         $response .= " y ";
@@ -91,7 +100,7 @@ if ($connected) {
         }
     } elseif (!empty($grado) && !empty($profesor)) {
         // Titulacion and Profesor -> Asignaturas y Grupos
-        $sql = "SELECT DISTINCT asignatura, grupo, tipo_grupo FROM cursos WHERE titulacion = :grado AND profesor = :profesor";
+        $sql = "SELECT DISTINCT asignatura, grupo FROM cursos WHERE titulacion = :grado AND profesor = :profesor";
         $params = [':grado' => $grado, ':profesor' => $profesor];
         $results = executeQuery($conn, $sql, $params);
 
@@ -102,16 +111,25 @@ if ($connected) {
             foreach ($results as $row) {
                 $asignatura = $row['asignatura'];
                 $grupo = $row['grupo'];
-                $tipoDeGrupo = $row['tipo_grupo'];
+                $tipoDeGrupo = '';
 
-                if (!isset($asignaturaGrupos[$asignatura])) {
-                    $asignaturaGrupos[$asignatura] = [];
+                // Verificar si el grupo es un número (Laboratory) o una letra (Theory)
+                if (is_numeric($grupo)) {
+                    $tipoDeGrupo = 'Grupo de practicas';
+                } elseif (ctype_alpha($grupo)) {
+                    $tipoDeGrupo = 'Grupo de teoria';
                 }
 
-                $asignaturaGrupos[$asignatura][] = [
-                    'grupo' => $grupo,
-                    'tipo' => $tipoDeGrupo,
-                ];
+                if (!empty($tipoDeGrupo)) {
+                    if (!isset($asignaturaGrupos[$asignatura])) {
+                        $asignaturaGrupos[$asignatura] = [];
+                    }
+
+                    $asignaturaGrupos[$asignatura][] = [
+                        'grupo' => $grupo,
+                        'tipo' => $tipoDeGrupo,
+                    ];
+                }
             }
 
             foreach ($asignaturaGrupos as $asignatura => $grupos) {
@@ -119,7 +137,7 @@ if ($connected) {
 
                 $grupoCount = count($grupos);
                 for ($i = 0; $i < $grupoCount; $i++) {
-                    $response .= "grupo " . $grupos[$i]['grupo'] . " de " . $grupos[$i]['tipo'] . "<break time=\"50ms\"/>";
+                    $response .= $grupos[$i]['tipo'] . " " . $grupos[$i]['grupo'] . "<break time=\"50ms\"/>";
 
                     if ($i == $grupoCount - 2) {
                         $response .= " y ";
