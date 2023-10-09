@@ -68,6 +68,19 @@
                 <prompt> Ha elegido usted el <value expr="grado"/>. </prompt>
             </filled>
         </field>
+
+        <field>
+            <grammar src="grammars/confirmacion.jsgf"/>
+            <prompt> Es correcta esta informacion? </prompt>
+            <filled>
+                <if cond="opcion=='si'">
+                    <prompt>De acuerdo. </prompt>
+                <else/>
+                    <prompt>De acuerdo. Volvamos a intentarlo. </prompt>
+                    <goto next="#seleccionar_opcion"/>
+                </if>
+            </filled>
+        </field>
         
         <field name="opcion">
             <grammar src="grammars/option_es.jsgf"/>
@@ -98,6 +111,25 @@
                 </if>
                 <!-- Reiniciamos el formulario después de hacer una consulta -->
                 <goto next="#f_reiniciar"/>
+            </filled>
+        </field>
+    </form>
+
+    <form id="f_reiniciar">
+        <field name="reinicio">
+            <grammar src="grammars/confirmacion.jsgf"/>
+            <prompt>Desea hacer algo mas?</prompt>
+            <filled>
+                <if cond="reinicio=='si'">
+                    <prompt>De acuerdo. Reiniciando el Formulario...</prompt>
+                    <break time="1s"/>
+                    <goto next="#seleccionar_opcion"/>
+                <else/>
+                    <prompt>Muchas gracias por haber utilizar el servicio, esperamos que haya sido de su agrado.</prompt>
+                    <noinput>
+                        <exit/>
+                    </noinput>
+                </if>
             </filled>
         </field>
     </form>
