@@ -26,27 +26,27 @@
         <reprompt/>
     </catch>
 
-    <catch event="info_subjects_en">
-        <prompt>The subject must be one of those offered in any of the ETSIIT degree programs. For example, say Fundamentals of  Programming.</prompt>
+    <catch event="info_subjects_en" xml:lang="en-GB">
+        <prompt xml:lang="en-GB">The subject must be one of those offered in any of the ETSIIT degree programs. For example, say Fundamentals of  Programming.</prompt>
         <reprompt/>
     </catch>
 
-    <catch event="info_professors_en">
+    <catch event="info_professors_en" xml:lang="en-GB">
         <prompt>You need to provide the full name, including both first name and last name, of a professor at ETSIIT.</prompt>
         <reprompt/>
     </catch>
 
-    <catch event="info_years_en">
+    <catch event="info_years_en" xml:lang="en-GB">
         <prompt>You need to specify the academic year. Try saying First academic year, Second academic year, Third academic year, Fourth academic year, or Fifth academic year.</prompt>
         <reprompt/>
     </catch>
 
-    <catch event="info_groups_en">
+    <catch event="info_groups_en" xml:lang="en-GB">
         <prompt>Groups can be a number or a letter. Try saying GROUP, followed by the group identifier.</prompt>
         <reprompt/>
     </catch>
 
-    <catch event="option_en">
+    <catch event="option_en" xml:lang="en-GB">
         <prompt>Simply say year, subject, professor, or schedule.</prompt>
         <reprompt/>
     </catch>
