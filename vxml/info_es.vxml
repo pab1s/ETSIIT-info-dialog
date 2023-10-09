@@ -142,7 +142,7 @@
             <noinput><throw event="info_profesores_es"/></noinput>
             <filled>
                 <assign name="profesor" expr="prof"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/dynamic_vxml.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -156,7 +156,7 @@
             <noinput><throw event="info_asignaturas_es"/></noinput>
             <filled>
                 <assign name="asignatura" expr="asig"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/dynamic_vxml.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -170,7 +170,7 @@
             <noinput><throw event="info_cursos_es"/></noinput>
             <filled>
                 <assign name="curso" expr="numeroCurso"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado curso" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/dynamic_vxml.php" method="post" namelist="grado curso" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -194,7 +194,7 @@
             <noinput><throw event="info_grupos_es"/></noinput>
             <filled>
                 <assign name="grupo" expr="castingGrupo(grupoaelegir)"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/dynamic_vxml.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>

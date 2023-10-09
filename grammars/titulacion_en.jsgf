@@ -1,8 +1,8 @@
 #JSGF V1.0;
 
-grammar degrees;
+grammar titulacion_en;
 
-public <degrees> = <informatics> | <telecommunications> | <business> | <maths>;
+public <titulacion_en> = <informatics> | <telecommunications> | <business> | <maths>;
 
 <informatics> = informatics | computer science | computer engineering | bachelors degree in computer engineering | bachelor in computer engineering | bachelors degree in computer science;
 

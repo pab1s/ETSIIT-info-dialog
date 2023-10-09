@@ -14,7 +14,6 @@ $serverName = "localhost";
 $database = "info_etsiit";
 $username = "info_etsiit";
 $password = "Akie4puyXm";
-$password = "Akie4puyXm";
 
 // Initialize the response
 $response = "";

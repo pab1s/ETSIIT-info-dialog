@@ -4,7 +4,7 @@ import csv
 from unidecode import unidecode
 
 # Choose the language (es for Spanish, en for English)
-language = 'es'  # Change to 'en' for English
+language = 'en'  # Change to 'en' for English
 
 # Define URLs based on the selected language
 if language == 'es':
@@ -68,7 +68,8 @@ for grado in grados:
 
     # Obtiene el encabezado h1, que es el nombre del programa de grado
     nombre_titulacion = soup.find('h1', class_='page-title').text.strip()
-
+    nombre_titulacion = nombre_titulacion.replace('+', 'plus')
+    nombre_titulacion = nombre_titulacion.replace("'", '')
     # Encuentra todas las secciones de cursos
     secciones_cursos = soup.find_all(
         'div', class_='block-views-blockpeople-subject-asignatura-persona')
@@ -93,6 +94,7 @@ for grado in grados:
 
                 # Obtiene el contenido de la asignatura
                 asignatura = asignatura.text.strip()
+                asignatura = asignatura.replace('-', ' ')
 
                 # Obtiene la especialidad de la asignatura
                 inicio = asignatura.find('(')
@@ -124,6 +126,7 @@ for grado in grados:
 
                     for profesor in profesores:
                         nombre_profesor = profesor.a.text.strip()
+                        nombre_profesor = nombre_profesor.replace('-', ' ')
                         grupos = profesor.find(
                             'span', class_='grupos').text.strip().split()[-1]
 
