@@ -221,12 +221,12 @@ if ($connected) {
 
 // Output the response as VoiceXML
 echo '<?xml version="1.0" encoding="UTF-8"?>';
-echo '<vxml version="2.1" xml:lang="en-EN" xmlns="http://www.w3.org/2001/vxml">';
+echo '<vxml version="2.1" xml:lang="en-US" xmlns="http://www.w3.org/2001/vxml">';
 echo '<form>';
 echo '<block>';
 echo "<prompt>$response</prompt>";
 echo "<prompt>$goodbye</prompt>";
-echo '<disconnect/>';
+echo '<exit/>';
 echo '</block>';
 echo '</form>';
 echo '</vxml>';
