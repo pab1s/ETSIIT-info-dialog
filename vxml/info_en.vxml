@@ -116,6 +116,25 @@
         </field>
     </form>
 
+    <form id="f_reiniciar">
+        <field name="reinicio">
+            <grammar src="grammars/confirmacion.jsgf"/>
+            <prompt>Do you want to do anything else?</prompt>
+            <filled>
+                <if cond="reinicio=='si'">
+                    <prompt>OK. Restarting form...</prompt>
+                    <break time="1s"/>
+                    <goto next="#seleccionar_opcion"/>
+                <else/>
+                    <prompt>Thank you for using this service, we hope you had a great experience.</prompt>
+                    <noinput>
+                        <exit/>
+                    </noinput>
+                </if>
+            </filled>
+        </field>
+    </form>
+
     <form id="f_profesores">
         <field name="prof">
             <grammar src="grammars/profesores.jsgf"/>
