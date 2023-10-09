@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version="2.1" xml:lang="es-ES" application="eventos.vxml">
+<vxml version="2.1" xml:lang="en-EN" application="eventos.vxml">
 
     <!-- Constants -->
-    <var name="GRADO_INFORMATICA" expr="'Bachelor'S Degree in Computer Engineering'" />
-    <var name="GRADO_TELECOM" expr="'Bachelor'S Degree in Telecommunications Engineering'" />
-    <var name="GRADO_INFORMATICA_MATEMATICAS" expr="'Bachelor'S Degree in Computer Engineering and Bachelor'S Degree in Mathematics'" />
-    <var name="GRADO_INFORMATICA_ADE" expr="'Bachelor'S Degree in Computer Engineering + Bachelor'S Degree in Business Administrat.And Management'" />
+    <var name="GRADO_INFORMATICA" expr="'Bachelor\'S Degree in Computer Engineering'" />
+    <var name="GRADO_TELECOM" expr="'Bachelor\'S Degree in Telecommunications Engineering'" />
+    <var name="GRADO_INFORMATICA_MATEMATICAS" expr="'Bachelor\'S Degree in Computer Engineering and Bachelor\'S Degree in Mathematics'" />
+    <var name="GRADO_INFORMATICA_ADE" expr="'Bachelor\'S Degree in Computer Engineering + Bachelor\'S Degree in Business Administrat.And Management'" />
 
     <!-- Variables -->
     <var name="grado" expr=""/>
@@ -16,16 +16,16 @@
     <var name="grupo" expr="" />
 
     <!-- Prompts -->
-    <var name="PROMPT_TITULACION" expr="'Start by telling us the name of the degree you want information about.' "/>
+    <var name="PROMPT_TITULACION" expr="'Tell us the name of the degree you want information about.' "/>
     <var name="PROMPT_OPCION" expr="'We can provide information about a YEAR, SUBJECT, PROFESSOR, or SCHEDULE.' "/>
     <var name="PROMPT_DESEAR" expr="'Is there anything else you would like to do?' "/>
     <var name="PROMPT_PROFESOR" expr="'Please provide the name of the professor.' "/>
     <var name="PROMPT_ASIGNATURA" expr="'Please provide the name of the subject.' "/>
-    <var name="PROMPT_CURSO" expr="'Please indicate the course you want to inquire about.' "/>
+    <var name="PROMPT_CURSO" expr="'Please indicate the academic year you want to inquire about.' "/>
     <var name="PROMPT_ASIGNATURA_HORARIO" expr="'Please provide the name of the subject you want to inquire about the schedule for.' "/>
     <var name="PROMPT_GRUPO_HORARIO_1" expr="'Please indicate the group of ' "/>
     <var name="PROMPT_GRUPO_HORARIO_2" expr="' for which you want to inquire about the schedule.' "/>
-    <var name="PROMPT_GRADOS_ERROR" expr="'Sorry, we didn't understand the name of the degree you wanted. Please make sure it is one of the 4 offered at ETSIIT. Please try again.' "/>
+    <var name="PROMPT_GRADOS_ERROR" expr="'Sorry, we didn\'t understand the name of the degree you wanted. Please make sure it is one of the 4 offered at ETSIIT. Please try again.' "/>
 
 
     <!-- Scripts -->
@@ -111,7 +111,7 @@
             <noinput><throw event="info_professors_en"/></noinput>
             <filled>
                 <assign name="profesor" expr="prof"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/new_dynamic_vxml_en.php" method="post" namelist="grado profesor" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -125,7 +125,7 @@
             <noinput><throw event="info_subjects_en"/></noinput>
             <filled>
                 <assign name="asignatura" expr="asig"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/new_dynamic_vxml_en.php" method="post" namelist="grado asignatura" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -139,7 +139,7 @@
             <noinput><throw event="info_years_en"/></noinput>
             <filled>
                 <assign name="curso" expr="numeroCurso"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado curso" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/new_dynamic_vxml_en.php" method="post" namelist="grado curso" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
@@ -163,7 +163,7 @@
             <noinput><throw event="info_groups_en"/></noinput>
             <filled>
                 <assign name="grupo" expr="castingGroup(grupoaelegir)"/>
-                <submit next="https://etsiit.000webhostapp.com/dynamic_vxml_en.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
+                <submit next="http://134.122.104.22/new_dynamic_vxml_en.php" method="post" namelist="grado asignatura grupo" fetchtimeout="100s" />
                 <goto next="#f_reiniciar"/>
             </filled>
         </field>
