@@ -2,10 +2,10 @@
 <vxml version="2.1" xml:lang="en-EN" application="eventos.vxml">
 
     <!-- Constants -->
-    <var name="GRADO_INFORMATICA" expr="'Bachelor\'S Degree in Computer Engineering'" />
-    <var name="GRADO_TELECOM" expr="'Bachelor\'S Degree in Telecommunications Engineering'" />
-    <var name="GRADO_INFORMATICA_MATEMATICAS" expr="'Bachelor\'S Degree in Computer Engineering and Bachelor\'S Degree in Mathematics'" />
-    <var name="GRADO_INFORMATICA_ADE" expr="'Bachelor\'S Degree in Computer Engineering + Bachelor\'S Degree in Business Administrat.And Management'" />
+    <var name="GRADO_INFORMATICA" expr="'BachelorS Degree in Computer Engineering'" />
+    <var name="GRADO_TELECOM" expr="'BachelorS Degree in Telecommunications Engineering'" />
+    <var name="GRADO_INFORMATICA_MATEMATICAS" expr="'BachelorS Degree in Computer Engineering and BachelorS Degree in Mathematics'" />
+    <var name="GRADO_INFORMATICA_ADE" expr="'BachelorS Degree in Computer Engineering + BachelorS Degree in Business Administrat.And Management'" />
 
     <!-- Variables -->
     <var name="grado" expr=""/>
@@ -25,7 +25,7 @@
     <var name="PROMPT_ASIGNATURA_HORARIO" expr="'Please provide the name of the subject you want to inquire about the schedule for.' "/>
     <var name="PROMPT_GRUPO_HORARIO_1" expr="'Please indicate the group of ' "/>
     <var name="PROMPT_GRUPO_HORARIO_2" expr="' for which you want to inquire about the schedule.' "/>
-    <var name="PROMPT_GRADOS_ERROR" expr="'Sorry, we didn\'t understand the name of the degree you wanted. Please make sure it is one of the 4 offered at ETSIIT. Please try again.' "/>
+    <var name="PROMPT_GRADOS_ERROR" expr="'Sorry, we didnt understand the name of the degree you wanted. Please make sure it is one of the 4 offered at ETSIIT. Please try again.' "/>
 
 
     <!-- Scripts -->

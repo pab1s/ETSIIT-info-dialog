@@ -3,15 +3,15 @@ function checkDegree(degree) {
     "informatics",
     "computer science",
     "computer engineering",
-    "bachelor's degree in computer engineering",
+    "bachelors degree in computer engineering",
     "bachelor in computer engineering",
-    "bachelor's degree in computer science"
+    "bachelors degree in computer science"
   ];
   
   const telecommunications = [
     "teleco",
     "telecommunications",
-    "bachelor's degree in telecommunications",
+    "bachelors degree in telecommunications",
     "bachelor in telecommunications"
   ];
   
@@ -28,8 +28,8 @@ function checkDegree(degree) {
     "business administration and computer engineering",
     "computer engineering and management",
     "computer engineering and business management",
-    "bachelor's degree in computer engineering and bachelor's degree in business administration and management",
-    "bachelor's degree in computer engineering plus bachelor's degree in business administration and management",
+    "bachelors degree in computer engineering and bachelors degree in business administration and management",
+    "bachelors degree in computer engineering plus bachelors degree in business administration and management",
     "double degree in computer science and business administration",
     "double degree in computer engineering and business administration",
     "double degree in informatics and ade",
@@ -48,9 +48,9 @@ function checkDegree(degree) {
     "double degree in computer engineering and mathematics",
     "double degree in computer engineering and maths",
     "double degree in mathematics and computer engineering",
-    "bachelor's degree in computer engineering and mathematics",
-    "bachelor's degree in computer engineering and bachelor's degree in mathematics",
-    "bachelor's degree in computer engineering plus bachelor's degree in mathematics"
+    "bachelors degree in computer engineering and mathematics",
+    "bachelors degree in computer engineering and bachelors degree in mathematics",
+    "bachelors degree in computer engineering plus bachelors degree in mathematics"
   ];
   
   let response = 0;
