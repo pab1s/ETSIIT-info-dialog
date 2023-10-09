@@ -1,5 +1,5 @@
 function checkDegree(degree) {
-  const informatics = [
+  var informatics = [
     'informatics',
     'computer science',
     'computer engineering',
@@ -8,14 +8,14 @@ function checkDegree(degree) {
     'bachelors degree in computer science'
   ];
   
-  const telecommunications = [
+  var telecommunications = [
     'teleco',
     'telecommunications',
     'bachelors degree in telecommunications',
     'bachelor in telecommunications'
   ];
   
-  const business = [
+  var business = [
     'business',
     'management',
     'administration',
@@ -36,7 +36,7 @@ function checkDegree(degree) {
     'double degree in computer engineering and ade'
   ];
   
-  const maths = [
+  var maths = [
     'maths',
     'mathematics',
     'informatics and maths',
@@ -53,16 +53,19 @@ function checkDegree(degree) {
     'bachelors degree in computer engineering plus bachelors degree in mathematics'
   ];
   
-  let response = 0;
+  var response = 0;
 
-  if (informatics.includes(degree)) {
+  // Si el index es -1 quiere decir que no se se corresponde con ningun valor de la Entity
+  if (!(informatics.indexOf(degree) === -1)) {
     response = 1;
-  } else if (telecommunications.includes(degree)) {
+  }else if (!(telecommunications.indexOf(degree) === -1)){
     response = 2;
-  } else if (maths.includes(degree)) {
-    response = 3;
-  } else if (business.includes(degree)) {
-    response = 4;
+  }else if (!(maths.indexOf(degree) === -1)){
+   response = 3;
+  }else if (!(business.indexOf(degree) === -1)){
+   response = 4;
+  } else{
+   response = 0;
   }
 
   return response;
