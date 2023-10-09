@@ -69,15 +69,15 @@
             </filled>
         </field>
 
-        <field>
+        <field name="confirm">
             <grammar src="grammars/confirmacion.jsgf"/>
             <prompt> Es correcta esta informacion? </prompt>
             <filled>
-                <if cond="opcion=='si'">
-                    <prompt>De acuerdo. </prompt>
-                <else/>
+                <if cond="confirm=='no'">
                     <prompt>De acuerdo. Volvamos a intentarlo. </prompt>
                     <goto next="#seleccionar_opcion"/>
+                <else/>
+                    <prompt>De acuerdo. </prompt>
                 </if>
             </filled>
         </field>
